@@ -1,301 +1,510 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PI Dashboard</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-</head>
-<body class="bg-light">
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-light">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#"><i class="fas fa-eye me-2"></i>PI Dashboard</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="#"><i class="fas fa-home me-1"></i>Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="casses.html"><i class="fas fa-folder me-1"></i>Cases</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="client.html"><i class="fas fa-users me-1"></i>Clients</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="calnder.html"><i class="fas fa-calendar me-1"></i>Schedule</a>
-                    </li>
-                </ul>
-                <!-- Search Bar -->
-                <form class="d-flex mx-auto">
-                    <div class="input-group">
-                        <input class="form-control" type="search" placeholder="Search cases, clients, or reports..." style="width: 300px;">
-                        <button class="btn btn-outline-light" type="submit"><i class="fas fa-search"></i></button>
-                    </div>
-                </form>
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-bell me-1"></i><span class="badge bg-danger">3</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-user me-1"></i>Profile</a>
-                    </li>
-                </ul>
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"
+          ><i class="fas fa-eye me-2"></i>PI Dashboard</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" href="#"
+                ><i class="fas fa-home me-1"></i>Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="casses.html"
+                ><i class="fas fa-folder me-1"></i>Cases</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="client.html"
+                ><i class="fas fa-users me-1"></i>Clients</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="calnder.html"
+                ><i class="fas fa-calendar me-1"></i>Schedule</a
+              >
+            </li>
+          </ul>
+          <!-- Search Bar -->
+          <form class="d-flex mx-auto">
+            <div class="input-group">
+              <input
+                class="form-control"
+                type="search"
+                placeholder="Search cases, clients, or reports..."
+                style="width: 300px"
+              />
+              <button class="btn btn-outline-light" type="submit">
+                <i class="fas fa-search"></i>
+              </button>
             </div>
+          </form>
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#"
+                ><i class="fas fa-bell me-1"></i
+                ><span class="badge bg-danger">3</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"
+                ><i class="fas fa-user me-1"></i>Profile</a
+              >
+            </li>
+          </ul>
         </div>
+      </div>
     </nav>
 
     <div class="container-fluid py-4">
-        <div class="row g-4">
-            <!-- Statistics Cards -->
-            <div class="col-md-3">
-                <div class="card bg-primary text-white">
-                    <div class="card-body">
-                        <h5 class="card-title">Active Cases</h5>
-                        <h2>12</h2>
-                        <p class="mb-0"><i class="fas fa-arrow-up me-1"></i>3 new this week</p>
-                    </div>
-                </div>
+      <div class="row g-4">
+        <!-- Statistics Cards -->
+        <div class="col-md-3">
+          <div class="card bg-primary text-white">
+            <div class="card-body">
+              <h5 class="card-title">Active Cases</h5>
+              <h2>12</h2>
+              <p class="mb-0">
+                <i class="fas fa-arrow-up me-1"></i>3 new this week
+              </p>
             </div>
-            <div class="col-md-3">
-                <div class="card bg-success text-white">
-                    <div class="card-body">
-                        <h5 class="card-title">Solved Cases</h5>
-                        <h2>148</h2>
-                        <p class="mb-0"><i class="fas fa-check me-1"></i>4 this month</p>
-                    </div>
-                </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card bg-success text-white">
+            <div class="card-body">
+              <h5 class="card-title">Solved Cases</h5>
+              <h2>148</h2>
+              <p class="mb-0"><i class="fas fa-check me-1"></i>4 this month</p>
             </div>
-            <div class="col-md-3">
-                <div class="card bg-warning text-white">
-                    <div class="card-body">
-                        <h5 class="card-title">Pending Reports</h5>
-                        <h2>7</h2>
-                        <p class="mb-0"><i class="fas fa-clock me-1"></i>Due this week</p>
-                    </div>
-                </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card bg-warning text-white">
+            <div class="card-body">
+              <h5 class="card-title">Pending Reports</h5>
+              <h2>7</h2>
+              <p class="mb-0"><i class="fas fa-clock me-1"></i>Due this week</p>
             </div>
-            <div class="col-md-3">
-                <div class="card bg-info text-white">
-                    <div class="card-body">
-                        <h5 class="card-title">Active Clients</h5>
-                        <h2>28</h2>
-                        <p class="mb-0"><i class="fas fa-users me-1"></i>2 new this month</p>
-                    </div>
-                </div>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="card bg-info text-white">
+            <div class="card-body">
+              <h5 class="card-title">Active Clients</h5>
+              <h2>28</h2>
+              <p class="mb-0">
+                <i class="fas fa-users me-1"></i>2 new this month
+              </p>
             </div>
+          </div>
+        </div>
 
-            <!-- Calendar View -->
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-header bg-white d-flex justify-content-between align-items-center">
-                        <h5 class="card-title mb-0">Calendar</h5>
-                        <div class="btn-group">
-                            <button class="btn btn-outline-secondary btn-sm"><i class="fas fa-chevron-left"></i></button>
-                            <button class="btn btn-outline-secondary btn-sm">January 2025</button>
-                            <button class="btn btn-outline-secondary btn-sm"><i class="fas fa-chevron-right"></i></button>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <table class="table table-bordered">
-                            <thead>
-                                <tr>
-                                    <th>Sun</th><th>Mon</th><th>Tue</th><th>Wed</th><th>Thu</th><th>Fri</th><th>Sat</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="text-muted">28</td>
-                                    <td class="text-muted">29</td>
-                                    <td class="text-muted">30</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td class="bg-primary text-white">6</td>
-                                    <td>7</td>
-                                    <td class="bg-warning text-white">8</td>
-                                    <td>9</td>
-                                    <td>10</td>
-                                    <td>11</td>
-                                </tr>
-                                <!-- Additional rows omitted for brevity -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
+        <!-- Calendar View -->
+        <div class="col-md-4">
+          <div class="card">
+            <div
+              class="card-header bg-white d-flex justify-content-between align-items-center"
+            >
+              <h5 class="card-title mb-0">Calendar</h5>
+              <div class="btn-group">
+                <button class="btn btn-outline-secondary btn-sm">
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="btn btn-outline-secondary btn-sm">
+                  January 2025
+                </button>
+                <button class="btn btn-outline-secondary btn-sm">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+              </div>
             </div>
-
-            <!-- Recent Cases Table with Enhanced Features -->
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header bg-white">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h5 class="card-title mb-0">Recent Cases</h5>
-                            <div class="btn-group">
-                                <button class="btn btn-outline-secondary btn-sm">Filter</button>
-                                <button class="btn btn-outline-secondary btn-sm">Export</button>
-                                <button class="btn btn-primary btn-sm">New Case</button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Case ID <i class="fas fa-sort"></i></th>
-                                    <th>Client <i class="fas fa-sort"></i></th>
-                                    <th>Type <i class="fas fa-sort"></i></th>
-                                    <th>Status <i class="fas fa-sort"></i></th>
-                                    <th>Progress</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>#PI-2025-001</td>
-                                    <td>
-                                        <img src="/api/placeholder/32/32" class="rounded-circle me-2" alt="Profile">
-                                        John Smith
-                                    </td>
-                                    <td>Background Check</td>
-                                    <td><span class="badge bg-success">Active</span></td>
-                                    <td>
-                                        <div class="progress" style="height: 5px;">
-                                            <div class="progress-bar bg-success" style="width: 70%"></div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <button class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
-                                            <button class="btn btn-sm btn-info"><i class="fas fa-file"></i></button>
-                                            <button class="btn btn-sm btn-secondary dropdown-toggle" data-bs-toggle="dropdown"></button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#"><i class="fas fa-share me-2"></i>Share</a></li>
-                                                <li><a class="dropdown-item" href="#"><i class="fas fa-archive me-2"></i>Archive</a></li>
-                                                <li><hr class="dropdown-divider"></li>
-                                                <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-trash me-2"></i>Delete</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>#PI-2025-002</td>
-                                    <td>
-                                        <img src="/api/placeholder/32/32" class="rounded-circle me-2" alt="Profile">
-                                        Sarah Johnson
-                                    </td>
-                                    <td>Surveillance</td>
-                                    <td><span class="badge bg-warning">Pending</span></td>
-                                    <td>
-                                        <div class="progress" style="height: 5px;">
-                                            <div class="progress-bar bg-warning" style="width: 45%"></div>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="btn-group">
-                                            <button class="btn btn-sm btn-primary"><i class="fas fa-edit"></i></button>
-                                            <button class="btn btn-sm btn-info"><i class="fas fa-file"></i></button>
-                                            <button class="btn btn-sm btn-secondary dropdown-toggle" data-bs-toggle="dropdown"></button>
-                                            <ul class="dropdown-menu">
-                                                <li><a class="dropdown-item" href="#"><i class="fas fa-share me-2"></i>Share</a></li>
-                                                <li><a class="dropdown-item" href="#"><i class="fas fa-archive me-2"></i>Archive</a></li>
-                                                <li><hr class="dropdown-divider"></li>
-                                                <li><a class="dropdown-item text-danger" href="#"><i class="fas fa-trash me-2"></i>Delete</a></li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <nav>
-                            <ul class="pagination justify-content-end mb-0">
-                                <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
-                                <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                                <li class="page-item"><a class="page-link" href="#">2</a></li>
-                                <li class="page-item"><a class="page-link" href="#">3</a></li>
-                                <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                            </ul>
-                        </nav>
-                    </div>
-                </div>
+            <div class="card-body">
+              <table class="table table-bordered">
+                <thead>
+                  <tr>
+                    <th>Sun</th>
+                    <th>Mon</th>
+                    <th>Tue</th>
+                    <th>Wed</th>
+                    <th>Thu</th>
+                    <th>Fri</th>
+                    <th>Sat</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="text-muted">28</td>
+                    <td class="text-muted">29</td>
+                    <td class="text-muted">30</td>
+                    <td>1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                  </tr>
+                  <tr>
+                    <td>5</td>
+                    <td class="bg-primary text-white">6</td>
+                    <td>7</td>
+                    <td class="bg-warning text-white">8</td>
+                    <td>9</td>
+                    <td>10</td>
+                    <td>11</td>
+                  </tr>
+                  <!-- Additional rows omitted for brevity -->
+                </tbody>
+              </table>
             </div>
+          </div>
+        </div>
 
-            <!-- Case Analytics -->
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header bg-white">
-                        <h5 class="card-title mb-0">Case Analytics</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="mb-4">
-                            <h6>Case Types Distribution</h6>
-                            <div class="progress" style="height: 25px;">
-                                <div class="progress-bar" style="width: 35%" data-bs-toggle="tooltip" title="Background Checks">35%</div>
-                                <div class="progress-bar bg-success" style="width: 25%" data-bs-toggle="tooltip" title="Surveillance">25%</div>
-                                <div class="progress-bar bg-info" style="width: 20%" data-bs-toggle="tooltip" title="Missing Persons">20%</div>
-                                <div class="progress-bar bg-warning" style="width: 20%" data-bs-toggle="tooltip" title="Other">20%</div>
-                            </div>
-                        </div>
-                        <div>
-                            <h6>Monthly Case Resolution Rate</h6>
-                            <div style="height: 200px; background: #f8f9fa; border-radius: 4px; display: flex; align-items: flex-end; padding: 10px;">
-                                <div style="height: 60%; width: 30px; background: #0d6efd; margin: 0 5px;" data-bs-toggle="tooltip" title="Jan"></div>
-                                <div style="height: 75%; width: 30px; background: #0d6efd; margin: 0 5px;" data-bs-toggle="tooltip" title="Feb"></div>
-                                <div style="height: 45%; width: 30px; background: #0d6efd; margin: 0 5px;" data-bs-toggle="tooltip" title="Mar"></div>
-                                <div style="height: 90%; width: 30px; background: #0d6efd; margin: 0 5px;" data-bs-toggle="tooltip" title="Apr"></div>
-                                <!-- Additional months would go here -->
-                            </div>
-                        </div>
-                    </div>
+        <!-- Recent Cases Table with Enhanced Features -->
+        <div class="col-md-8">
+          <div class="card">
+            <div class="card-header bg-white">
+              <div class="d-flex justify-content-between align-items-center">
+                <h5 class="card-title mb-0">Recent Cases</h5>
+                <div class="btn-group">
+                  <button class="btn btn-outline-secondary btn-sm">
+                    Filter
+                  </button>
+                  <button class="btn btn-outline-secondary btn-sm">
+                    Export
+                  </button>
+                  <button class="btn btn-primary btn-sm">New Case</button>
                 </div>
+              </div>
             </div>
+            <div class="card-body">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Case ID <i class="fas fa-sort"></i></th>
+                    <th>Client <i class="fas fa-sort"></i></th>
+                    <th>Type <i class="fas fa-sort"></i></th>
+                    <th>Status <i class="fas fa-sort"></i></th>
+                    <th>Progress</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>#PI-2025-001</td>
+                    <td>
+                      <img
+                        src="/api/placeholder/32/32"
+                        class="rounded-circle me-2"
+                        alt="Profile"
+                      />
+                      John Smith
+                    </td>
+                    <td>Background Check</td>
+                    <td><span class="badge bg-success">Active</span></td>
+                    <td>
+                      <div class="progress" style="height: 5px">
+                        <div
+                          class="progress-bar bg-success"
+                          style="width: 70%"
+                        ></div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="btn-group">
+                        <button class="btn btn-sm btn-primary">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-info">
+                          <i class="fas fa-file"></i>
+                        </button>
+                        <button
+                          class="btn btn-sm btn-secondary dropdown-toggle"
+                          data-bs-toggle="dropdown"
+                        ></button>
+                        <ul class="dropdown-menu">
+                          <li>
+                            <a class="dropdown-item" href="#"
+                              ><i class="fas fa-share me-2"></i>Share</a
+                            >
+                          </li>
+                          <li>
+                            <a class="dropdown-item" href="#"
+                              ><i class="fas fa-archive me-2"></i>Archive</a
+                            >
+                          </li>
+                          <li><hr class="dropdown-divider" /></li>
+                          <li>
+                            <a class="dropdown-item text-danger" href="#"
+                              ><i class="fas fa-trash me-2"></i>Delete</a
+                            >
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td>#PI-2025-002</td>
+                    <td>
+                      <img
+                        src="/api/placeholder/32/32"
+                        class="rounded-circle me-2"
+                        alt="Profile"
+                      />
+                      Sarah Johnson
+                    </td>
+                    <td>Surveillance</td>
+                    <td><span class="badge bg-warning">Pending</span></td>
+                    <td>
+                      <div class="progress" style="height: 5px">
+                        <div
+                          class="progress-bar bg-warning"
+                          style="width: 45%"
+                        ></div>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="btn-group">
+                        <button class="btn btn-sm btn-primary">
+                          <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-sm btn-info">
+                          <i class="fas fa-file"></i>
+                        </button>
+                        <button
+                          class="btn btn-sm btn-secondary dropdown-toggle"
+                          data-bs-toggle="dropdown"
+                        ></button>
+                        <ul class="dropdown-menu">
+                          <li>
+                            <a class="dropdown-item" href="#"
+                              ><i class="fas fa-share me-2"></i>Share</a
+                            >
+                          </li>
+                          <li>
+                            <a class="dropdown-item" href="#"
+                              ><i class="fas fa-archive me-2"></i>Archive</a
+                            >
+                          </li>
+                          <li><hr class="dropdown-divider" /></li>
+                          <li>
+                            <a class="dropdown-item text-danger" href="#"
+                              ><i class="fas fa-trash me-2"></i>Delete</a
+                            >
+                          </li>
+                        </ul>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <nav>
+                <ul class="pagination justify-content-end mb-0">
+                  <li class="page-item disabled">
+                    <a class="page-link" href="#">Previous</a>
+                  </li>
+                  <li class="page-item active">
+                    <a class="page-link" href="#">1</a>
+                  </li>
+                  <li class="page-item"><a class="page-link" href="#">2</a></li>
+                  <li class="page-item"><a class="page-link" href="#">3</a></li>
+                  <li class="page-item">
+                    <a class="page-link" href="#">Next</a>
+                  </li>
+                </ul>
+              </nav>
+            </div>
+          </div>
+        </div>
 
-            <!-- Quick Actions and Reminders -->
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header bg-white">
-                        <h5 class="card-title mb-0">Quick Actions & Reminders</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="mb-3">
-                            <div class="btn-group w-100 mb-3">
-                                <button class="btn btn-outline-primary"><i class="fas fa-plus-circle me-2"></i>New Case</button>
-                                <button class="btn btn-outline-success"><i class="fas fa-user-plus me-2"></i>Add Client</button>
-                                <button class="btn btn-outline-info"><i class="fas fa-file-alt me-2"></i>New Report</button>
-                            </div>
-                        </div>
-                        <div class="list-group">
-                            <div class="list-group">
-                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                                    <i class="fas fa-exclamation-circle text-warning me-2"></i> Follow up on pending reports
-                                    <span class="badge bg-warning">3</span>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                                    <i class="fas fa-calendar-check text-primary me-2"></i> Schedule client meetings
-                                    <span class="badge bg-primary">2</span>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                                    <i class="fas fa-tasks text-success me-2"></i> Review case progress
-                                    <span class="badge bg-success">5</span>
-                                </a>
-                                <a href="#" class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
-                                    <i class="fas fa-bell text-danger me-2"></i> Check notifications
-                                    <span class="badge bg-danger">3</span>
-                                </a>
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-                            </div>
-                            
-                            <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-                            </body>
-                            </html>
-                                                    
+        <!-- Case Analytics -->
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header bg-white">
+              <h5 class="card-title mb-0">Case Analytics</h5>
+            </div>
+            <div class="card-body">
+              <div class="mb-4">
+                <h6>Case Types Distribution</h6>
+                <div class="progress" style="height: 25px">
+                  <div
+                    class="progress-bar"
+                    style="width: 35%"
+                    data-bs-toggle="tooltip"
+                    title="Background Checks"
+                  >
+                    35%
+                  </div>
+                  <div
+                    class="progress-bar bg-success"
+                    style="width: 25%"
+                    data-bs-toggle="tooltip"
+                    title="Surveillance"
+                  >
+                    25%
+                  </div>
+                  <div
+                    class="progress-bar bg-info"
+                    style="width: 20%"
+                    data-bs-toggle="tooltip"
+                    title="Missing Persons"
+                  >
+                    20%
+                  </div>
+                  <div
+                    class="progress-bar bg-warning"
+                    style="width: 20%"
+                    data-bs-toggle="tooltip"
+                    title="Other"
+                  >
+                    20%
+                  </div>
+                </div>
+              </div>
+              <div>
+                <h6>Monthly Case Resolution Rate</h6>
+                <div
+                  style="
+                    height: 200px;
+                    background: #f8f9fa;
+                    border-radius: 4px;
+                    display: flex;
+                    align-items: flex-end;
+                    padding: 10px;
+                  "
+                >
+                  <div
+                    style="
+                      height: 60%;
+                      width: 30px;
+                      background: #0d6efd;
+                      margin: 0 5px;
+                    "
+                    data-bs-toggle="tooltip"
+                    title="Jan"
+                  ></div>
+                  <div
+                    style="
+                      height: 75%;
+                      width: 30px;
+                      background: #0d6efd;
+                      margin: 0 5px;
+                    "
+                    data-bs-toggle="tooltip"
+                    title="Feb"
+                  ></div>
+                  <div
+                    style="
+                      height: 45%;
+                      width: 30px;
+                      background: #0d6efd;
+                      margin: 0 5px;
+                    "
+                    data-bs-toggle="tooltip"
+                    title="Mar"
+                  ></div>
+                  <div
+                    style="
+                      height: 90%;
+                      width: 30px;
+                      background: #0d6efd;
+                      margin: 0 5px;
+                    "
+                    data-bs-toggle="tooltip"
+                    title="Apr"
+                  ></div>
+                  <!-- Additional months would go here -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Actions and Reminders -->
+        <div class="col-md-6">
+          <div class="card">
+            <div class="card-header bg-white">
+              <h5 class="card-title mb-0">Quick Actions & Reminders</h5>
+            </div>
+            <div class="card-body">
+              <div class="mb-3">
+                <div class="btn-group w-100 mb-3">
+                  <button class="btn btn-outline-primary">
+                    <i class="fas fa-plus-circle me-2"></i>New Case
+                  </button>
+                  <button class="btn btn-outline-success">
+                    <i class="fas fa-user-plus me-2"></i>Add Client
+                  </button>
+                  <button class="btn btn-outline-info">
+                    <i class="fas fa-file-alt me-2"></i>New Report
+                  </button>
+                </div>
+              </div>
+              <div class="list-group">
+                <div class="list-group">
+                  <a
+                    href="#"
+                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                  >
+                    <i class="fas fa-exclamation-circle text-warning me-2"></i>
+                    Follow up on pending reports
+                    <span class="badge bg-warning">3</span>
+                  </a>
+                  <a
+                    href="#"
+                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                  >
+                    <i class="fas fa-calendar-check text-primary me-2"></i>
+                    Schedule client meetings
+                    <span class="badge bg-primary">2</span>
+                  </a>
+                  <a
+                    href="#"
+                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                  >
+                    <i class="fas fa-tasks text-success me-2"></i> Review case
+                    progress
+                    <span class="badge bg-success">5</span>
+                  </a>
+                  <a
+                    href="#"
+                    class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+                  >
+                    <i class="fas fa-bell text-danger me-2"></i> Check
+                    notifications
+                    <span class="badge bg-danger">3</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
