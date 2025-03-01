@@ -76,7 +76,7 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#"
+              <a class="nav-link" href="#" id="profileLink"
                 ><i class="fas fa-user me-1"></i>Profile</a
               >
             </li>
@@ -87,6 +87,49 @@
     <div class="container mt-5">
       <h2 class="mb-4">Dashboard Calendar</h2>
       <div id="calendar"></div>
+    </div>
+
+    <!-- Login Modal -->
+    <div
+      class="modal fade"
+      id="loginModal"
+      tabindex="-1"
+      aria-labelledby="loginModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="loginModalLabel">Sign In</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" required />
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary w-100">
+                Sign In
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
@@ -104,6 +147,21 @@
         });
         calendar.render();
       });
+      document.addEventListener("DOMContentLoaded", function () {
+        const profileLink = document.getElementById("profileLink");
+        const modalElement = document.getElementById("loginModal");
+
+        if (profileLink && modalElement) {
+          profileLink.addEventListener("click", function (event) {
+            event.preventDefault();
+            const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
+            modal.show();
+          });
+        } else {
+          console.error("profileLink or loginModal not found!");
+        }
+      });
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
