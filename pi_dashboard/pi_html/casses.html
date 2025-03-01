@@ -1,95 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cases</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#"><i class="fas fa-eye me-2"></i>PI Dashboard</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="pi-dashboard2.html"><i class="fas fa-home me-1"></i>Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="casses.html"><i class="fas fa-folder me-1"></i>Cases</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="client.html"><i class="fas fa-users me-1"></i>Clients</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="calnder.html"><i class="fas fa-calendar me-1"></i>Schedule</a>
-                    </li>
-                </ul>
-                <!-- Search Bar -->
-                <form class="d-flex mx-auto">
-                    <div class="input-group">
-                        <input class="form-control" type="search" placeholder="Search cases, clients, or reports..." style="width: 300px;">
-                        <button class="btn btn-outline-light" type="submit"><i class="fas fa-search"></i></button>
-                    </div>
-                </form>
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-bell me-1"></i><span class="badge bg-danger">3</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-user me-1"></i>Profile</a>
-                    </li>
-                </ul>
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"
+          ><i class="fas fa-eye me-2"></i>PI Dashboard</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" href="pi-dashboard2.html"
+                ><i class="fas fa-home me-1"></i>Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="casses.html"
+                ><i class="fas fa-folder me-1"></i>Cases</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="client.html"
+                ><i class="fas fa-users me-1"></i>Clients</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="calnder.html"
+                ><i class="fas fa-calendar me-1"></i>Schedule</a
+              >
+            </li>
+          </ul>
+          <!-- Search Bar -->
+          <form class="d-flex mx-auto">
+            <div class="input-group">
+              <input
+                class="form-control"
+                type="search"
+                placeholder="Search cases, clients, or reports..."
+                style="width: 300px"
+              />
+              <button class="btn btn-outline-light" type="submit">
+                <i class="fas fa-search"></i>
+              </button>
             </div>
+          </form>
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#"
+                ><i class="fas fa-bell me-1"></i
+                ><span class="badge bg-danger">3</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#"
+                ><i class="fas fa-user me-1"></i>Profile</a
+              >
+            </li>
+          </ul>
         </div>
+      </div>
     </nav>
     <div class="container mt-5">
-        <h2 class="mb-4">Cases Management</h2>
-        
-        <!-- Case Form -->
-        <div class="card p-4 mb-4">
-            <h4>Add New Case</h4>
-            <form id="caseForm">
-                <div class="mb-3">
-                    <label for="caseTitle" class="form-label">Case Title</label>
-                    <input type="text" class="form-control" id="caseTitle" required>
-                </div>
-                <div class="mb-3">
-                    <label for="caseDescription" class="form-label">Description</label>
-                    <textarea class="form-control" id="caseDescription" rows="3" required></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">Add Case</button>
-            </form>
-        </div>
-        
-        <!-- Cases List -->
-        <div class="card p-4">
-            <h4>Cases List</h4>
-            <ul id="caseList" class="list-group mt-3"></ul>
-        </div>
+      <h2 class="mb-4">Cases Management</h2>
+
+      <!-- Case Form -->
+      <div class="card p-4 mb-4">
+        <h4>Add New Case</h4>
+        <form id="caseForm">
+          <div class="mb-3">
+            <label for="caseTitle" class="form-label">Case Title</label>
+            <input type="text" class="form-control" id="caseTitle" required />
+          </div>
+          <div class="mb-3">
+            <label for="caseDescription" class="form-label">Description</label>
+            <textarea
+              class="form-control"
+              id="caseDescription"
+              rows="3"
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Add Case</button>
+        </form>
+      </div>
+
+      <!-- Cases List -->
+      <div class="card p-4">
+        <h4>Cases List</h4>
+        <ul id="caseList" class="list-group mt-3"></ul>
+      </div>
     </div>
 
     <script>
-        document.getElementById("caseForm").addEventListener("submit", function(event) {
-            event.preventDefault();
-            
-            let title = document.getElementById("caseTitle").value;
-            let description = document.getElementById("caseDescription").value;
-            
-            if(title && description) {
-                let listItem = document.createElement("li");
-                listItem.className = "list-group-item";
-                listItem.innerHTML = `<strong>${title}</strong><br>${description}`;
-                
-                document.getElementById("caseList").appendChild(listItem);
-                document.getElementById("caseForm").reset();
-            }
+      document
+        .getElementById("caseForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          let title = document.getElementById("caseTitle").value;
+          let description = document.getElementById("caseDescription").value;
+
+          if (title && description) {
+            let listItem = document.createElement("li");
+            listItem.className = "list-group-item";
+            listItem.innerHTML = `<strong>${title}</strong><br>${description}`;
+
+            document.getElementById("caseList").appendChild(listItem);
+            document.getElementById("caseForm").reset();
+          }
         });
     </script>
-    
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-</body>
+  </body>
 </html>
