@@ -76,6 +76,11 @@
                 ><i class="fas fa-user me-1"></i>Profile</a
               >
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="signupLink"
+                ><i class="fa-solid fa-user-plus"></i> Sign Up</a
+              >
+            </li>
           </ul>
         </div>
       </div>
@@ -154,6 +159,54 @@
       </div>
     </div>
 
+    <!-- Signup Modal -->
+    <div
+      class="modal fade"
+      id="signupModal"
+      tabindex="-1"
+      aria-labelledby="signupModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="signupModalLabel">Sign Up</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="signupemail"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="signuppassword"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary w-100">
+                Sign Up
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script>
       document
         .getElementById("clientForm")
@@ -172,6 +225,8 @@
             document.getElementById("clientForm").reset();
           }
         });
+
+      //Login Modal
       document.addEventListener("DOMContentLoaded", function () {
         const profileLink = document.getElementById("profileLink");
         const modalElement = document.getElementById("loginModal");
@@ -184,6 +239,22 @@
           });
         } else {
           console.error("profileLink or loginModal not found!");
+        }
+      });
+
+      //Signup Modal
+      document.addEventListener("DOMContentLoaded", function () {
+        const signupLink = document.getElementById("signupLink");
+        const signupModal = document.getElementById("signupModal");
+
+        if (signupLink && signupModal) {
+          signupLink.addEventListener("click", function (event) {
+            event.preventDefault();
+            const modal = bootstrap.Modal.getOrCreateInstance(signupModal);
+            modal.show();
+          });
+        } else {
+          console.error("signupLink or signupModal not found!");
         }
       });
     </script>
