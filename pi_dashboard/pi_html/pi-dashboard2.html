@@ -538,14 +538,19 @@
             <form>
               <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" required />
+                <input
+                  type="email"
+                  class="form-control"
+                  id="loginEmail"
+                  required
+                />
               </div>
               <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
                 <input
                   type="password"
                   class="form-control"
-                  id="password"
+                  id="loginPassword"
                   required
                 />
               </div>
@@ -584,7 +589,7 @@
                 <input
                   type="email"
                   class="form-control"
-                  id="signupemail"
+                  id="signupEmail"
                   required
                 />
               </div>
@@ -593,7 +598,7 @@
                 <input
                   type="password"
                   class="form-control"
-                  id="signuppassword"
+                  id="signupPassword"
                   required
                 />
               </div>
@@ -636,6 +641,8 @@
           console.error("signupLink or signupModal not found!");
         }
       });
+
+      document.getElementById("loginLink").addEventListener("click", () => {});
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
