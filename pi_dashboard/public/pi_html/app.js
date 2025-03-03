@@ -7,31 +7,6 @@ auth.onAuthStateChanged((user) => {
   }
 });
 
-// Log in Button
-// login_submit_button.addEventListener("click", () => {
-//   let login_email = document.getElementById("login_email").value;
-//   let login_password = document.getElementById("login_password").value;
-//   auth
-//     .signInWithEmailAndPassword(login_email, login_password)
-//     .then((userCredential) => {
-//       alert("Signed In!");
-//       login_modal.classList.remove("is-active");
-//       var user = userCredential.user;
-//     })
-//     .catch((err) => {
-//       console.log(err);
-//       r_e("login_messages_div").classList.remove("is-hidden");
-//       r_e("login_messages").innerHTML += err.message;
-//       setTimeout(() => {
-//         r_e("login_messages_div").classList.add("is-hidden");
-//         r_e("login_messages").innerHTML = "";
-//       }, 5000);
-//     });
-
-//   r_e("login_email").value = "";
-//   r_e("login_password").value = "";
-// });
-
 //Login Submit Button
 document.getElementById("loginSubmitButton").addEventListener("click", () => {
   let loginEmail = document.getElementById("loginEmail").value;
@@ -43,4 +18,17 @@ document.getElementById("loginSubmitButton").addEventListener("click", () => {
       var user = userCredential.user;
     });
   console.log("Clicked");
+});
+
+//Signup Submit Button
+document.getElementById("signupSubmitButton").addEventListener("click", () => {
+  let signupEmail = document.getElementById("signupEmail").value;
+  let singupPassword = document.getElementById("signupPassword").value;
+  console.log("Clicked");
+  auth
+    .createUserWithEmailAndPassword(signupEmail, singupPassword)
+    .then((userCredential) => {
+      alert("Account Created!");
+      var user = userCredential.user;
+    });
 });
