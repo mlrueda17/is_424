@@ -32,3 +32,11 @@ document.getElementById("signupSubmitButton").addEventListener("click", () => {
       var user = userCredential.user;
     });
 });
+
+//Signout Submit Button
+document.getElementById("signoutLink").addEventListener("click", () => {
+  console.log("Clicked");
+  auth.signOut().then(() => {
+    alert("You are now signed out");
+  });
+});
