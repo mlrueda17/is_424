@@ -23,14 +23,12 @@ document.getElementById("loginSubmitButton").addEventListener("click", () => {
       alert("Signed In!");
       var user = userCredential.user;
     });
-  console.log("Clicked");
 });
 
 //Signup Submit Button
 document.getElementById("signupSubmitButton").addEventListener("click", () => {
   let signupEmail = document.getElementById("signupEmail").value;
   let singupPassword = document.getElementById("signupPassword").value;
-  console.log("Clicked");
   auth
     .createUserWithEmailAndPassword(signupEmail, singupPassword)
     .then((userCredential) => {
@@ -41,7 +39,6 @@ document.getElementById("signupSubmitButton").addEventListener("click", () => {
 
 //Signout Submit Button
 document.getElementById("signoutLink").addEventListener("click", () => {
-  console.log("Clicked");
   auth.signOut().then(() => {
     alert("You are now signed out");
   });
