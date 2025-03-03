@@ -72,7 +72,7 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" id="profileLink"
+              <a class="nav-link" href="#" id="loginLink"
                 ><i class="fas fa-user me-1"></i>Profile</a
               >
             </li>
@@ -603,17 +603,17 @@
 
     <script>
       document.addEventListener("DOMContentLoaded", function () {
-        const profileLink = document.getElementById("profileLink");
+        const loginLink = document.getElementById("loginLink");
         const modalElement = document.getElementById("loginModal");
 
-        if (profileLink && modalElement) {
-          profileLink.addEventListener("click", function (event) {
+        if (loginLink && modalElement) {
+          loginLink.addEventListener("click", function (event) {
             event.preventDefault();
             const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
             modal.show();
           });
         } else {
-          console.error("profileLink or loginModal not found!");
+          console.error("loginLink or loginModal not found!");
         }
       });
 
