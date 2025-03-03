@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calendar</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#"
+          ><i class="fas fa-eye me-2"></i>PI Dashboard</a
+        >
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link active" href="pi-dashboard2.html"
+                ><i class="fas fa-home me-1"></i>Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="casses.html"
+                ><i class="fas fa-folder me-1"></i>Cases</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="client.html"
+                ><i class="fas fa-users me-1"></i>Clients</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="calnder.html"
+                ><i class="fas fa-calendar me-1"></i>Schedule</a
+              >
+            </li>
+          </ul>
+          <!-- Search Bar -->
+          <form class="d-flex mx-auto">
+            <div class="input-group">
+              <input
+                class="form-control"
+                type="search"
+                placeholder="Search cases, clients, or reports..."
+                style="width: 300px"
+              />
+              <button class="btn btn-outline-light" type="submit">
+                <i class="fas fa-search"></i>
+              </button>
+            </div>
+          </form>
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="#"
+                ><i class="fas fa-bell me-1"></i
+                ><span class="badge bg-danger">3</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="profileLink"
+                ><i class="fas fa-user me-1"></i>Profile</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" id="signupLink"
+                ><i class="fa-solid fa-user-plus"></i> Sign Up</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="container mt-5">
+      <h2 class="mb-4">Dashboard Calendar</h2>
+      <div id="calendar"></div>
+    </div>
+
+    <!-- Login Modal -->
+    <div
+      class="modal fade"
+      id="loginModal"
+      tabindex="-1"
+      aria-labelledby="loginModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="loginModalLabel">Sign In</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="email" required />
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="password"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary w-100">
+                Sign In
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div
+      class="modal fade"
+      id="signupModal"
+      tabindex="-1"
+      aria-labelledby="signupModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="signupModalLabel">Sign Up</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label for="email" class="form-label">Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="signupemail"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="signuppassword"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary w-100">
+                Sign Up
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var calendarEl = document.getElementById("calendar");
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: "dayGridMonth",
+          events: [
+            {
+              title: "Example Event",
+              start: new Date().toISOString().split("T")[0],
+            },
+          ],
+        });
+        calendar.render();
+      });
+
+      //Login Modal
+      document.addEventListener("DOMContentLoaded", function () {
+        const profileLink = document.getElementById("profileLink");
+        const modalElement = document.getElementById("loginModal");
+
+        if (profileLink && modalElement) {
+          profileLink.addEventListener("click", function (event) {
+            event.preventDefault();
+            const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
+            modal.show();
+          });
+        } else {
+          console.error("profileLink or loginModal not found!");
+        }
+      });
+
+      //Signup Modal
+      document.addEventListener("DOMContentLoaded", function () {
+        const signupLink = document.getElementById("signupLink");
+        const signupModal = document.getElementById("signupModal");
+
+        if (signupLink && signupModal) {
+          signupLink.addEventListener("click", function (event) {
+            event.preventDefault();
+            const modal = bootstrap.Modal.getOrCreateInstance(signupModal);
+            modal.show();
+          });
+        } else {
+          console.error("signupLink or signupModal not found!");
+        }
+      });
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
