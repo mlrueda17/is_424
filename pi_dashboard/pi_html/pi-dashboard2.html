@@ -671,5 +671,26 @@
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      // Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyAeESuKGBmiHxi1BedfhQnbyCUIhv4b-jA",
+        authDomain: "pidashboard-e9e97.firebaseapp.com",
+        projectId: "pidashboard-e9e97",
+        storageBucket: "pidashboard-e9e97.firebasestorage.app",
+        messagingSenderId: "654105078202",
+        appId: "1:654105078202:web:dd832bc8af519dbfdfd583",
+        measurementId: "G-J4SYM4J002",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      // define authentication variable
+      let auth = firebase.auth();
+      let db = firebase.firestore();
+
+      // define a storage reference
+      let ref = firebase.storage().ref();
+    </script>
   </body>
 </html>
