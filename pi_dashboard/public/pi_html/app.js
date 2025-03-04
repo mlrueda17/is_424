@@ -45,28 +45,28 @@ document.getElementById("signoutLink").addEventListener("click", () => {
 });
 
 
-// code for notification modal 
-document.addEventListener("DOMContentLoaded", function () {
-  const modal = document.getElementById("notificationModal");
-  const bellIcon = document.getElementById("notificationBell");
-  const closeModal = document.querySelector(".close");
+// // code for notification modal 
+// document.addEventListener("DOMContentLoaded", function () {
+//   const modal = document.getElementById("notificationModal");
+//   const bellIcon = document.getElementById("notificationBell");
+//   const closeModal = document.querySelector(".close");
 
-  // Show modal when clicking the bell icon
-  bellIcon.addEventListener("click", function (event) {
-      event.preventDefault(); // Prevent default anchor behavior
-      modal.classList.add("show");
-  });
+//   // Show modal when clicking the bell icon
+//   bellIcon.addEventListener("click", function (event) {
+//       event.preventDefault(); // Prevent default anchor behavior
+//       modal.classList.add("show");
+//   });
 
-  // Close modal when clicking the close button
-  closeModal.addEventListener("click", function () {
-      modal.classList.remove("show");
-  });
+//   // Close modal when clicking the close button
+//   closeModal.addEventListener("click", function () {
+//       modal.classList.remove("show");
+//   });
 
-  // Close modal when clicking outside of it
-  window.addEventListener("click", function (event) {
-      if (event.target === modal) {
-          modal.classList.remove("show");
-      }
-  });
-});
+//   // Close modal when clicking outside of it
+//   window.addEventListener("click", function (event) {
+//       if (event.target === modal) {
+//           modal.classList.remove("show");
+//       }
+//   });
+// });
 
