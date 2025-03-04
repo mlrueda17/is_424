@@ -70,3 +70,33 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
+// modals for sign in 
+document.addEventListener("DOMContentLoaded", function () {
+  const loginLink = document.getElementById("loginLink");
+  const modalElement = document.getElementById("loginModal");
+
+  if (loginLink && modalElement) {
+    loginLink.addEventListener("click", function (event) {
+      event.preventDefault();
+      const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
+      modal.show();
+    });
+  } else {
+    console.error("loginLink or loginModal not found!");
+  }
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+  const signupLink = document.getElementById("signupLink");
+  const signupModal = document.getElementById("signupModal");
+
+  if (signupLink && signupModal) {
+    signupLink.addEventListener("click", function (event) {
+      event.preventDefault();
+      const modal = bootstrap.Modal.getOrCreateInstance(signupModal);
+      modal.show();
+    });
+  } else {
+    console.error("signupLink or signupModal not found!");
+  }
+});
