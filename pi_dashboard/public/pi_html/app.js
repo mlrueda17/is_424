@@ -14,7 +14,8 @@ auth.onAuthStateChanged((user) => {
 });
 
 //Login Submit Button
-document.getElementById("loginSubmitButton").addEventListener("click", () => {
+document.getElementById("loginSubmitButton").addEventListener("click", (e) => {
+  e.preventDefault();
   let loginEmail = document.getElementById("loginEmail").value;
   let loginPassword = document.getElementById("loginPassword").value;
   auth
@@ -26,7 +27,8 @@ document.getElementById("loginSubmitButton").addEventListener("click", () => {
 });
 
 //Signup Submit Button
-document.getElementById("signupSubmitButton").addEventListener("click", () => {
+document.getElementById("signupSubmitButton").addEventListener("click", (e) => {
+  e.preventDefault();
   let signupEmail = document.getElementById("signupEmail").value;
   let singupPassword = document.getElementById("signupPassword").value;
   auth
@@ -44,8 +46,7 @@ document.getElementById("signoutLink").addEventListener("click", () => {
   });
 });
 
-
-// code for notification modal 
+// code for notification modal
 document.addEventListener("DOMContentLoaded", function () {
   const modal = document.getElementById("notificationModal");
   const bellIcon = document.getElementById("notificationBell");
@@ -53,24 +54,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Show modal when clicking the bell icon
   bellIcon.addEventListener("click", function (event) {
-      event.preventDefault(); // Prevent default anchor behavior
-      modal.classList.add("show");
+    event.preventDefault(); // Prevent default anchor behavior
+    modal.classList.add("show");
   });
 
   // Close modal when clicking the close button
   closeModal.addEventListener("click", function () {
-      modal.classList.remove("show");
+    modal.classList.remove("show");
   });
 
   // Close modal when clicking outside of it
   window.addEventListener("click", function (event) {
-      if (event.target === modal) {
-          modal.classList.remove("show");
-      }
+    if (event.target === modal) {
+      modal.classList.remove("show");
+    }
   });
 });
 
-// modals for sign in 
+// modals for sign in
 document.addEventListener("DOMContentLoaded", function () {
   const loginLink = document.getElementById("loginLink");
   const modalElement = document.getElementById("loginModal");
