@@ -66,7 +66,7 @@
           </form>
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
-              <a class="nav-link" href="#"
+              <a class="nav-link" href="#" id="notificationBell"
                 ><i class="fas fa-bell me-1"></i
                 ><span class="badge bg-danger">3</span></a
               >
@@ -90,7 +90,18 @@
         </div>
       </div>
     </nav>
-
+ <!-- Notification Modal -->
+ <div id="notificationModal" class="modal">
+  <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>You have new notifications!</p>
+      <ul>
+          <li>🔔 Notification 1</li>
+          <li>🔔 Notification 2</li>
+          <li>🔔 Notification 3</li>
+      </ul>
+  </div>
+</div>
     <div class="container-fluid py-4">
       <div class="row g-4">
         <!-- Statistics Cards -->
