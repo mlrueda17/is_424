@@ -1,5 +1,5 @@
 /* Style for the modal (hidden by default) */
-.modal {
+.notifiacation-modal {
     display: none; /* Initially hidden */
     position: fixed;
     left: 50%;
@@ -15,7 +15,7 @@
 }
 
 /* Modal Content */
-.modal-content {
+.notifiacation-modal-content {
     position: relative;
 }
 
@@ -29,7 +29,7 @@
 }
 
 /* Modal Animation */
-.modal.show {
+.notifiacation-modal.show {
     display: block;
     animation: fadeIn 0.3s ease-in-out;
 }
