@@ -134,3 +134,19 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error("signupLink or signupModal not found!");
   }
 });
+
+// New Report modal
+document.addEventListener("DOMContentLoaded", function () {
+  const newReportButton = document.getElementById("newReportButton");
+  const newReportModal = document.getElementById("newReportModal");
+
+  if (newReportButton && newReportModal) {
+    newReportButton.addEventListener("click", function (event) {
+      event.preventDefault();
+      const modal = bootstrap.Modal.getOrCreateInstance(newReportModal);
+      modal.show();
+    });
+  } else {
+    console.error("signupLink or signupModal not found!");
+  }
+});
