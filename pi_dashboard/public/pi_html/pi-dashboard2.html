@@ -478,7 +478,7 @@
                   <button id="newCaseButton" class="btn btn-outline-primary">
                     <i class="fas fa-plus-circle me-2"></i>New Case
                   </button>
-                  <button id="newClientButton" class="btn btn-outline-success">
+                  <button class="btn btn-outline-success">
                     <i class="fas fa-user-plus me-2"></i>Add Client
                   </button>
                   <button class="btn btn-outline-info">
@@ -602,15 +602,16 @@
           <div class="modal-body">
             <form>
               <div class="mb-3">
-                <label for="email" class="form-label">Full name</label>
+                <label class="form-label">Full Name</label>
                 <input
                   type="text"
                   class="form-control"
                   id="signupFullName"
                   required
                 />
+              </div>
               <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
+                <label class="form-label">Email address</label>
                 <input
                   type="email"
                   class="form-control"
@@ -618,8 +619,9 @@
                   required
                 />
               </div>
+
               <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
+                <label class="form-label">Password</label>
                 <input
                   type="password"
                   class="form-control"
@@ -704,65 +706,6 @@
                   type="date"
                   class="form-control"
                   id="newCaseDueDate"
-                  required
-                />
-              </div>
-              <button
-                type="submit"
-                class="btn btn-primary w-100"
-                id="signupSubmitButton"
-              >
-                Sign Up
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div
-      class="modal fade"
-      id="newClientModal"
-      tabindex="-1"
-      aria-labelledby="newClientModalLabel"
-      aria-hidden="true"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="newClientModalLabel">Sign Up</h5>
-            <button
-              type="button"
-              class="btn-close"
-              data-bs-dismiss="modal"
-              aria-label="Close"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <form>
-              <div class="mb-3">
-                <label for="email" class="form-label">Full name</label>
-                <input
-                  type="text"
-                  class="form-control"
-                  id="signupFullName"
-                  required
-                />
-              <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
-                <input
-                  type="email"
-                  class="form-control"
-                  id="signupEmail"
-                  required
-                />
-              </div>
-              <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input
-                  type="password"
-                  class="form-control"
-                  id="signupPassword"
                   required
                 />
               </div>

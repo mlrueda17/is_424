@@ -118,3 +118,19 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error("signupLink or signupModal not found!");
   }
 });
+
+// New Client modal
+document.addEventListener("DOMContentLoaded", function () {
+  const newClientButton = document.getElementById("newClientButton");
+  const newClientModal = document.getElementById("newClientModal");
+
+  if (newClientButton && newClientModal) {
+    newClientButton.addEventListener("click", function (event) {
+      event.preventDefault();
+      const modal = bootstrap.Modal.getOrCreateInstance(newClientModal);
+      modal.show();
+    });
+  } else {
+    console.error("signupLink or signupModal not found!");
+  }
+});
