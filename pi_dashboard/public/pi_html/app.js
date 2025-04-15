@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 });
 
-// modals for sign in
+// login modal
 document.addEventListener("DOMContentLoaded", function () {
   const loginLink = document.getElementById("loginLink");
   const modalElement = document.getElementById("loginModal");
@@ -87,6 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
+// signup modal
 document.addEventListener("DOMContentLoaded", function () {
   const signupLink = document.getElementById("signupLink");
   const signupModal = document.getElementById("signupModal");
