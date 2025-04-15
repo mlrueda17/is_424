@@ -102,3 +102,19 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error("signupLink or signupModal not found!");
   }
 });
+
+// New Case modal
+document.addEventListener("DOMContentLoaded", function () {
+  const newCaseButton = document.getElementById("newCaseButton");
+  const newCaseModal = document.getElementById("newCaseModal");
+
+  if (newCaseButton && newCaseModal) {
+    newCaseButton.addEventListener("click", function (event) {
+      event.preventDefault();
+      const modal = bootstrap.Modal.getOrCreateInstance(newCaseModal);
+      modal.show();
+    });
+  } else {
+    console.error("signupLink or signupModal not found!");
+  }
+});
