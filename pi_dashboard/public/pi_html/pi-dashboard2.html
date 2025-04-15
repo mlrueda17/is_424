@@ -643,7 +643,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="newCaseModalLabel">Sign Up</h5>
+            <h5 class="modal-title" id="newCaseModalLabel">New Case</h5>
             <button
               type="button"
               class="btn-close"
@@ -654,20 +654,48 @@
           <div class="modal-body">
             <form>
               <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
+                <label class="form-label">Case Title</label>
                 <input
-                  type="email"
+                  type="text"
                   class="form-control"
-                  id="signupEmail"
+                  id="newCaseTitle"
                   required
                 />
               </div>
               <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
+                <label class="form-label">Case Description</label>
                 <input
-                  type="password"
+                  type="text"
                   class="form-control"
-                  id="signupPassword"
+                  id="newCaseDescription"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Case Status</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="newCaseDescription"
+                  placeholder="Active, Pending, or Complete"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Associated Clent Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="newCaseClientEmail"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Due Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="newCaseDueDate"
                   required
                 />
               </div>
