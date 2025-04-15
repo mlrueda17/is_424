@@ -481,7 +481,7 @@
                   <button id="newClientButton" class="btn btn-outline-success">
                     <i class="fas fa-user-plus me-2"></i>Add Client
                   </button>
-                  <button class="btn btn-outline-info">
+                  <button id="newReportButton" class="btn btn-outline-info">
                     <i class="fas fa-file-alt me-2"></i>New Report
                   </button>
                 </div>
@@ -758,6 +758,86 @@
                   type="email"
                   class="form-control"
                   id="newClientEmail"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                class="btn btn-primary w-100"
+                id="signupSubmitButton"
+              >
+                Sign Up
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- New Report Modal -->
+    <div
+      class="modal fade"
+      id="newReportModal"
+      tabindex="-1"
+      aria-labelledby="newReportModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="newReportModalLabel">New Case</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label class="form-label">Case Title</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="newCaseTitle"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Case Description</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="newCaseDescription"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Case Status</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="newCaseDescription"
+                  placeholder="Active, Pending, or Complete"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Associated Clent Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="newCaseClientEmail"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Due Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="newCaseDueDate"
                   required
                 />
               </div>
