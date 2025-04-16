@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PI Dashboard</title>
-    
+
     <link
       href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"
       rel="stylesheet"
@@ -13,7 +13,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       rel="stylesheet"
     />
-   <link rel="stylesheet" href="style.css"> 
+    <link rel="stylesheet" href="style.css" />
   </head>
   <body class="bg-light">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -92,18 +92,18 @@
         </div>
       </div>
     </nav>
- <!-- Notification Modal -->
- <div id="notificationModal" class="notifiacation-modal">
-  <div class="modal-content">
-      <span class="close">&times;</span>
-      <p>You have new notifications!</p>
-      <ul>
+    <!-- Notification Modal -->
+    <div id="notificationModal" class="notifiacation-modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>You have new notifications!</p>
+        <ul>
           <li>🔔 Notification 1</li>
           <li>🔔 Notification 2</li>
           <li>🔔 Notification 3</li>
-      </ul>
-  </div>
-</div>
+        </ul>
+      </div>
+    </div>
     <div class="container-fluid py-4">
       <div class="row g-4">
         <!-- Statistics Cards -->
@@ -475,13 +475,13 @@
             <div class="card-body">
               <div class="mb-3">
                 <div class="btn-group w-100 mb-3">
-                  <button class="btn btn-outline-primary">
+                  <button id="newCaseButton" class="btn btn-outline-primary">
                     <i class="fas fa-plus-circle me-2"></i>New Case
                   </button>
-                  <button class="btn btn-outline-success">
+                  <button id="newClientButton" class="btn btn-outline-success">
                     <i class="fas fa-user-plus me-2"></i>Add Client
                   </button>
-                  <button class="btn btn-outline-info">
+                  <button id="newReportButton" class="btn btn-outline-info">
                     <i class="fas fa-file-alt me-2"></i>New Report
                   </button>
                 </div>
@@ -550,7 +550,7 @@
           <div class="modal-body">
             <form>
               <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
+                <label class="form-label">Email address</label>
                 <input
                   type="email"
                   class="form-control"
@@ -559,7 +559,7 @@
                 />
               </div>
               <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
+                <label class="form-label">Password</label>
                 <input
                   type="password"
                   class="form-control"
@@ -602,7 +602,16 @@
           <div class="modal-body">
             <form>
               <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
+                <label class="form-label">Full Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="signupFullName"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Email address</label>
                 <input
                   type="email"
                   class="form-control"
@@ -610,8 +619,9 @@
                   required
                 />
               </div>
+
               <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
+                <label class="form-label">Password</label>
                 <input
                   type="password"
                   class="form-control"
@@ -632,37 +642,199 @@
       </div>
     </div>
 
-    <script>
-      // document.addEventListener("DOMContentLoaded", function () {
-      //   const loginLink = document.getElementById("loginLink");
-      //   const modalElement = document.getElementById("loginModal");
+    <!-- New Case Modal -->
+    <div
+      class="modal fade"
+      id="newCaseModal"
+      tabindex="-1"
+      aria-labelledby="newCaseModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="newCaseModalLabel">New Case</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label class="form-label">Case Title</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="newCaseTitle"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Case Description</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="newCaseDescription"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Case Status</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="newCaseDescription"
+                  placeholder="Active, Pending, or Complete"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Associated Clent Email</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="newCaseClientEmail"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Due Date</label>
+                <input
+                  type="date"
+                  class="form-control"
+                  id="newCaseDueDate"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                class="btn btn-primary w-100"
+                id="signupSubmitButton"
+              >
+                Sign Up
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
-      //   if (loginLink && modalElement) {
-      //     loginLink.addEventListener("click", function (event) {
-      //       event.preventDefault();
-      //       const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
-      //       modal.show();
-      //     });
-      //   } else {
-      //     console.error("loginLink or loginModal not found!");
-      //   }
-      // });
+    <!-- New Client Modal -->
+    <div
+      class="modal fade"
+      id="newClientModal"
+      tabindex="-1"
+      aria-labelledby="newClientModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="newClientModalLabel">Add New Client</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label class="form-label">Client Full Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="newClientFullName"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Client Email address</label>
+                <input
+                  type="email"
+                  class="form-control"
+                  id="newClientEmail"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                class="btn btn-primary w-100"
+                id="signupSubmitButton"
+              >
+                Sign Up
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
-      // document.addEventListener("DOMContentLoaded", function () {
-      //   const signupLink = document.getElementById("signupLink");
-      //   const signupModal = document.getElementById("signupModal");
+    <!-- New Report Modal -->
+    <div
+      class="modal fade"
+      id="newReportModal"
+      tabindex="-1"
+      aria-labelledby="newReportModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="newReportModalLabel">New Report</h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="mb-3">
+                <label class="form-label">Report Title</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="newReportTitle"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Related Case Title</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="newReportCaseTitle"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">FIle Path</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="newReportFilePath"
+                  required
+                />
+              </div>
 
-      //   if (signupLink && signupModal) {
-      //     signupLink.addEventListener("click", function (event) {
-      //       event.preventDefault();
-      //       const modal = bootstrap.Modal.getOrCreateInstance(signupModal);
-      //       modal.show();
-      //     });
-      //   } else {
-      //     console.error("signupLink or signupModal not found!");
-      //   }
-      // });
-    </script>
+              <button
+                type="submit"
+                class="btn btn-primary w-100"
+                id="signupSubmitButton"
+              >
+                Sign Up
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 
