@@ -1,5 +1,5 @@
 /* Style for the modal (hidden by default) */
-.notifiacation-modal {
+.notification-modal {
     display: none; /* Initially hidden */
     position: fixed;
     left: 50%;
