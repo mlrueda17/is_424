@@ -208,23 +208,35 @@
     </div>
 
     <script>
-      document
-        .getElementById("caseForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
+      document.getElementById("caseForm").addEventListener("submit", function (event) {
+        event.preventDefault();
 
-          let title = document.getElementById("caseTitle").value;
-          let description = document.getElementById("caseDescription").value;
+        let title = document.getElementById("caseTitle").value;
+        let description = document.getElementById("caseDescription").value;
 
-          if (title && description) {
+        if (title && description) {
+          // Save to Firebase
+          const newCaseRef = database.ref("cases").push();
+          newCaseRef.set({
+            title: title,
+            description: description,
+            timestamp: Date.now()
+          })
+          .then(() => {
+            // Add to the UI
             let listItem = document.createElement("li");
             listItem.className = "list-group-item";
             listItem.innerHTML = `<strong>${title}</strong><br>${description}`;
-
             document.getElementById("caseList").appendChild(listItem);
+
+            // Reset the form
             document.getElementById("caseForm").reset();
-          }
-        });
+          })
+          .catch((error) => {
+            console.error("Error adding case to Firebase:", error);
+          });
+        }
+      });
 
       //Login Modal
       document.addEventListener("DOMContentLoaded", function () {
@@ -257,8 +269,35 @@
           console.error("signupLink or signupModal not found!");
         }
       });
+
+      // Firebase configuration
+      const firebaseConfig = {
+        apiKey: "AIzaSyAeESuKGBmiHxi1BedfhQnbyCUIhv4b-jA",
+        authDomain: "pidashboard-e9e97.firebaseapp.com",
+        projectId: "pidashboard-e9e97",
+        storageBucket: "pidashboard-e9e97.firebasestorage.app",
+        messagingSenderId: "654105078202",
+        appId: "1:654105078202:web:dd832bc8af519dbfdfd583",
+        measurementId: "G-J4SYM4J002",
+      };
+
+      // Initialize Firebase
+      const app = firebase.initializeApp(firebaseConfig);
+      const database = firebase.database();
+
+      // Firebase Database Rules
+      const databaseRules = {
+        "rules": {
+          ".read": true,
+          ".write": true
+        }
+      };
+
+      database.setRules(databaseRules);
     </script>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js"></script>
   </body>
 </html>
