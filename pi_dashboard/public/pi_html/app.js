@@ -52,6 +52,29 @@ document.addEventListener("DOMContentLoaded", function () {
   const bellIcon = document.getElementById("notificationBell");
   const closeModal = document.querySelector(".close");
 
+  if (modal && bellIcon && closeModal) {
+    // Show modal when clicking the bell icon
+    bellIcon.addEventListener("click", function (event) {
+      event.preventDefault(); // Prevent default anchor behavior
+      modal.classList.add("show");
+    });
+
+    // Close modal when clicking the close button
+    closeModal.addEventListener("click", function () {
+      modal.classList.remove("show");
+    });
+
+    // Close modal when clicking outside of it
+    window.addEventListener("click", function (event) {
+      if (event.target === modal) {
+        modal.classList.remove("show");
+      }
+    });
+  }
+});
+
+
+
   // Show modal when clicking the bell icon
   bellIcon.addEventListener("click", function (event) {
     event.preventDefault(); // Prevent default anchor behavior
@@ -69,7 +92,7 @@ document.addEventListener("DOMContentLoaded", function () {
       modal.classList.remove("show");
     }
   });
-});
+
 
 // login modal
 document.addEventListener("DOMContentLoaded", function () {

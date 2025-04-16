@@ -15,7 +15,7 @@
 }
 
 /* Modal Content */
-.notifiacation-modal-content {
+.notification-modal-content {
     position: relative;
 }
 
@@ -29,7 +29,7 @@
 }
 
 /* Modal Animation */
-.notifiacation-modal.show {
+.notification-modal.show {
     display: block;
     animation: fadeIn 0.3s ease-in-out;
 }

@@ -16,6 +16,8 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="style.css" />
+
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -93,7 +95,20 @@
       <h2 class="mb-4">Dashboard Calendar</h2>
       <div id="calendar"></div>
     </div>
-
+    <!-- Notification Modal -->
+    <div id="notificationModal" class="notification-modal">
+      <div class="modal-content">
+        <span class="close">&times;</span>
+        <p>You have new notifications!</p>
+        <ul>
+          <li>🔔 Notification 1</li>
+          <li>🔔 Notification 2</li>
+          <li>🔔 Notification 3</li>
+        </ul>
+      </div>
+    </div>
+    <div class="container-fluid py-4">
+      <div class="row g-4">
     <!-- Login Modal -->
     <div
       class="modal fade"
@@ -234,5 +249,7 @@
       });
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+<script src="app.js"></script>
+
   </body>
 </html>
