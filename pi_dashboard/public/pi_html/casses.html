@@ -207,69 +207,13 @@
       </div>
     </div>
 
+    <!-- Bootstrap & Firebase Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+
     <script>
-      document.getElementById("caseForm").addEventListener("submit", function (event) {
-        event.preventDefault();
-
-        let title = document.getElementById("caseTitle").value;
-        let description = document.getElementById("caseDescription").value;
-
-        if (title && description) {
-          // Save to Firebase
-          const newCaseRef = database.ref("cases").push();
-          newCaseRef.set({
-            title: title,
-            description: description,
-            timestamp: Date.now()
-          })
-          .then(() => {
-            // Add to the UI
-            let listItem = document.createElement("li");
-            listItem.className = "list-group-item";
-            listItem.innerHTML = `<strong>${title}</strong><br>${description}`;
-            document.getElementById("caseList").appendChild(listItem);
-
-            // Reset the form
-            document.getElementById("caseForm").reset();
-          })
-          .catch((error) => {
-            console.error("Error adding case to Firebase:", error);
-          });
-        }
-      });
-
-      //Login Modal
-      document.addEventListener("DOMContentLoaded", function () {
-        const profileLink = document.getElementById("profileLink");
-        const modalElement = document.getElementById("loginModal");
-
-        if (profileLink && modalElement) {
-          profileLink.addEventListener("click", function (event) {
-            event.preventDefault();
-            const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
-            modal.show();
-          });
-        } else {
-          console.error("profileLink or loginModal not found!");
-        }
-      });
-
-      //Signup Modal
-      document.addEventListener("DOMContentLoaded", function () {
-        const signupLink = document.getElementById("signupLink");
-        const signupModal = document.getElementById("signupModal");
-
-        if (signupLink && signupModal) {
-          signupLink.addEventListener("click", function (event) {
-            event.preventDefault();
-            const modal = bootstrap.Modal.getOrCreateInstance(signupModal);
-            modal.show();
-          });
-        } else {
-          console.error("signupLink or signupModal not found!");
-        }
-      });
-
       // Firebase configuration
       const firebaseConfig = {
         apiKey: "AIzaSyAeESuKGBmiHxi1BedfhQnbyCUIhv4b-jA",
@@ -278,26 +222,136 @@
         storageBucket: "pidashboard-e9e97.firebasestorage.app",
         messagingSenderId: "654105078202",
         appId: "1:654105078202:web:dd832bc8af519dbfdfd583",
-        measurementId: "G-J4SYM4J002",
+        measurementId: "G-J4SYM4J002"
       };
 
       // Initialize Firebase
-      const app = firebase.initializeApp(firebaseConfig);
-      const database = firebase.database();
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
 
-      // Firebase Database Rules
-      const databaseRules = {
-        "rules": {
-          ".read": true,
-          ".write": true
+      // Form submission for adding a new case
+      document.getElementById("caseForm").addEventListener("submit", function (event) {
+        event.preventDefault();
+
+        const title = document.getElementById("caseTitle").value;
+        const description = document.getElementById("caseDescription").value;
+
+        if (title && description) {
+          // Add to Firestore
+          db.collection("cases").add({
+            title: title,
+            description: description,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+          })
+          .then(() => {
+            // Add the case to the UI
+            loadCases();
+            
+            // Reset the form
+            document.getElementById("caseForm").reset();
+          })
+          .catch((error) => {
+            console.error("Error adding case:", error);
+          });
+        } else {
+          console.error("Title or description is missing!");
         }
-      };
+      });
 
-      database.setRules(databaseRules);
+      // Function to display cases
+      function loadCases() {
+        const caseList = document.getElementById("caseList");
+        caseList.innerHTML = ''; // Clear existing cases
+        
+        db.collection("cases").orderBy("timestamp", "desc").get()
+          .then((querySnapshot) => {
+            if (querySnapshot.empty) {
+              caseList.innerHTML = '<li class="list-group-item text-muted">No cases found</li>';
+            } else {
+              querySnapshot.forEach((doc) => {
+                const caseData = doc.data();
+                const caseId = doc.id;
+                
+                // Create list item with Bootstrap styling
+                const listItem = document.createElement("li");
+                listItem.className = "list-group-item";
+                
+                // Create case content with title, description, and delete button
+                listItem.innerHTML = `
+                  <div class="d-flex justify-content-between align-items-start">
+                    <div>
+                      <strong>${caseData.title}</strong>
+                      <p class="mb-1">${caseData.description}</p>
+                      ${caseData.timestamp ? `<small class="text-muted">Added on ${caseData.timestamp.toDate().toLocaleString()}</small>` : ''}
+                    </div>
+                    <button class="btn btn-sm btn-danger delete-case" data-id="${caseId}">
+                      <i class="fas fa-trash"></i>
+                    </button>
+                  </div>
+                `;
+                
+                caseList.appendChild(listItem);
+              });
+              
+              // Add event listeners to all delete buttons
+              document.querySelectorAll(".delete-case").forEach(button => {
+                button.addEventListener("click", function() {
+                  const caseId = this.getAttribute("data-id");
+                  deleteCase(caseId);
+                });
+              });
+            }
+          })
+          .catch((error) => {
+            console.error("Error getting cases:", error);
+            caseList.innerHTML = '<li class="list-group-item text-danger">Error loading cases</li>';
+          });
+      }
+
+      // Function to delete a case
+      function deleteCase(caseId) {
+        if (confirm("Are you sure you want to delete this case?")) {
+          db.collection("cases").doc(caseId).delete()
+            .then(() => {
+              console.log("Case successfully deleted!");
+              loadCases(); // Refresh the list
+            })
+            .catch((error) => {
+              console.error("Error removing case: ", error);
+            });
+        }
+      }
+
+      // Login Modal
+      document.addEventListener("DOMContentLoaded", function () {
+        const profileLink = document.getElementById("profileLink");
+        const modalElement = document.getElementById("loginModal");
+
+        if (profileLink && modalElement) {
+          profileLink.addEventListener("click", function (event) {
+            event.preventDefault();
+            const modal = new bootstrap.Modal(modalElement);
+            modal.show();
+          });
+        }
+      });
+
+      // Signup Modal
+      document.addEventListener("DOMContentLoaded", function () {
+        const signupLink = document.getElementById("signupLink");
+        const signupModal = document.getElementById("signupModal");
+
+        if (signupLink && signupModal) {
+          signupLink.addEventListener("click", function (event) {
+            event.preventDefault();
+            const modal = new bootstrap.Modal(signupModal);
+            modal.show();
+          });
+        }
+        
+        // Load cases when page loads
+        loadCases();
+      });
     </script>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database.js"></script>
   </body>
 </html>
