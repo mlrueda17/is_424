@@ -150,3 +150,111 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error("signupLink or signupModal not found!");
   }
 });
+
+// Form submission for adding a new case
+document
+  .getElementById("caseForm")
+  .addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    const title = document.getElementById("caseTitle").value;
+    const description = document.getElementById("caseDescription").value;
+
+    if (title && description) {
+      // Add to Firestore
+      db.collection("cases")
+        .add({
+          title: title,
+          description: description,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        })
+        .then(() => {
+          // Add the case to the UI
+          loadCases();
+
+          // Reset the form
+          document.getElementById("caseForm").reset();
+        })
+        .catch((error) => {
+          console.error("Error adding case:", error);
+        });
+    } else {
+      console.error("Title or description is missing!");
+    }
+  });
+
+// Function to display cases
+function loadCases() {
+  const caseList = document.getElementById("caseList");
+  caseList.innerHTML = ""; // Clear existing cases
+
+  db.collection("cases")
+    .orderBy("timestamp", "desc")
+    .get()
+    .then((querySnapshot) => {
+      if (querySnapshot.empty) {
+        caseList.innerHTML =
+          '<li class="list-group-item text-muted">No cases found</li>';
+      } else {
+        querySnapshot.forEach((doc) => {
+          const caseData = doc.data();
+          const caseId = doc.id;
+
+          // Create list item with Bootstrap styling
+          const listItem = document.createElement("li");
+          listItem.className = "list-group-item";
+
+          // Create case content with title, description, and delete button
+          listItem.innerHTML = `
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <strong>${caseData.title}</strong>
+              <p class="mb-1">${caseData.description}</p>
+              ${
+                caseData.timestamp
+                  ? `<small class="text-muted">Added on ${caseData.timestamp
+                      .toDate()
+                      .toLocaleString()}</small>`
+                  : ""
+              }
+            </div>
+            <button class="btn btn-sm btn-danger delete-case" data-id="${caseId}">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        `;
+
+          caseList.appendChild(listItem);
+        });
+
+        // Add event listeners to all delete buttons
+        document.querySelectorAll(".delete-case").forEach((button) => {
+          button.addEventListener("click", function () {
+            const caseId = this.getAttribute("data-id");
+            deleteCase(caseId);
+          });
+        });
+      }
+    })
+    .catch((error) => {
+      console.error("Error getting cases:", error);
+      caseList.innerHTML =
+        '<li class="list-group-item text-danger">Error loading cases</li>';
+    });
+}
+
+// Function to delete a case
+function deleteCase(caseId) {
+  if (confirm("Are you sure you want to delete this case?")) {
+    db.collection("cases")
+      .doc(caseId)
+      .delete()
+      .then(() => {
+        console.log("Case successfully deleted!");
+        loadCases(); // Refresh the list
+      })
+      .catch((error) => {
+        console.error("Error removing case: ", error);
+      });
+  }
+}
