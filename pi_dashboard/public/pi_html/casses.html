@@ -72,13 +72,18 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#" id="profileLink"
+              <a class="nav-link" href="#" id="loginLink"
                 ><i class="fas fa-user me-1"></i>Profile</a
               >
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" id="signupLink"
                 ><i class="fa-solid fa-user-plus"></i> Sign Up</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link d-none" href="#" id="signoutLink"
+                ><i class="fa-solid fa-user-slash"></i> Sign Out</a
               >
             </li>
           </ul>
@@ -163,19 +168,28 @@
           <div class="modal-body">
             <form>
               <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
-                <input type="email" class="form-control" id="email" required />
-              </div>
-              <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
+                <label class="form-label">Email address</label>
                 <input
-                  type="password"
+                  type="email"
                   class="form-control"
-                  id="password"
+                  id="loginEmail"
                   required
                 />
               </div>
-              <button type="submit" class="btn btn-primary w-100">
+              <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="loginPassword"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                class="btn btn-primary w-100"
+                id="loginSubmitButton"
+              >
                 Sign In
               </button>
             </form>
@@ -206,24 +220,38 @@
           <div class="modal-body">
             <form>
               <div class="mb-3">
-                <label for="email" class="form-label">Email address</label>
+                <label class="form-label">Full Name</label>
                 <input
-                  type="email"
+                  type="text"
                   class="form-control"
-                  id="signupemail"
+                  id="signupFullName"
                   required
                 />
               </div>
               <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
+                <label class="form-label">Email address</label>
                 <input
-                  type="password"
+                  type="email"
                   class="form-control"
-                  id="signuppassword"
+                  id="signupEmail"
                   required
                 />
               </div>
-              <button type="submit" class="btn btn-primary w-100">
+
+              <div class="mb-3">
+                <label class="form-label">Password</label>
+                <input
+                  type="password"
+                  class="form-control"
+                  id="signupPassword"
+                  required
+                />
+              </div>
+              <button
+                type="submit"
+                class="btn btn-primary w-100"
+                id="signupSubmitButton"
+              >
                 Sign Up
               </button>
             </form>
@@ -234,9 +262,19 @@
 
     <!-- Bootstrap & Firebase Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-firestore-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+
+    <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-app.js"></script>
+
+    <!-- If you enabled Analytics in your project, add the Firebase SDK for Analytics -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-analytics.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-storage.js"></script>
+
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.3.1/firebase-firestore.js"></script>
 
     <script>
       // Firebase configuration
@@ -249,11 +287,17 @@
         appId: "1:654105078202:web:dd832bc8af519dbfdfd583",
         measurementId: "G-J4SYM4J002",
       };
-
       // Initialize Firebase
       firebase.initializeApp(firebaseConfig);
-      const db = firebase.firestore();
+      // define authentication variable
+      let auth = firebase.auth();
+      let db = firebase.firestore();
 
+      // define a storage reference
+      let ref = firebase.storage().ref();
+    </script>
+    <script src="app.js"></script>
+    <script>
       // Form submission for adding a new case
       document
         .getElementById("caseForm")
@@ -361,38 +405,6 @@
             });
         }
       }
-
-      // Login Modal
-      document.addEventListener("DOMContentLoaded", function () {
-        const profileLink = document.getElementById("profileLink");
-        const modalElement = document.getElementById("loginModal");
-
-        if (profileLink && modalElement) {
-          profileLink.addEventListener("click", function (event) {
-            event.preventDefault();
-            const modal = new bootstrap.Modal(modalElement);
-            modal.show();
-          });
-        }
-      });
-
-      // Signup Modal
-      document.addEventListener("DOMContentLoaded", function () {
-        const signupLink = document.getElementById("signupLink");
-        const signupModal = document.getElementById("signupModal");
-
-        if (signupLink && signupModal) {
-          signupLink.addEventListener("click", function (event) {
-            event.preventDefault();
-            const modal = new bootstrap.Modal(signupModal);
-            modal.show();
-          });
-        }
-
-        // Load cases when page loads
-        loadCases();
-      });
     </script>
-    <script src="app.js"></script>
   </body>
 </html>
