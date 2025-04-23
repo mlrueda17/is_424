@@ -1,3 +1,6 @@
+// Function Calls
+loadCases();
+
 //Auth state
 auth.onAuthStateChanged((user) => {
   if (user) {
@@ -22,6 +25,7 @@ document.getElementById("loginSubmitButton").addEventListener("click", (e) => {
     .signInWithEmailAndPassword(loginEmail, loginPassword)
     .then((userCredential) => {
       alert("Signed In!");
+      loadCases();
       var user = userCredential.user;
     });
 });
@@ -36,12 +40,14 @@ document.getElementById("signupSubmitButton").addEventListener("click", (e) => {
     .then((userCredential) => {
       alert("Account Created!");
       var user = userCredential.user;
+      loadCases();
     });
 });
 
 //Signout Submit Button
 document.getElementById("signoutLink").addEventListener("click", () => {
   auth.signOut().then(() => {
+    loadCases();
     alert("You are now signed out");
   });
 });
