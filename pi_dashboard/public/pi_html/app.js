@@ -33,20 +33,19 @@ document.getElementById("signupSubmitButton").addEventListener("click", (e) => {
   let singupPassword = document.getElementById("signupPassword").value;
   let full_name = document.getElementById("signupFullName").value;
   let role = "client";
-  let userID = auth.currentUser.uid;
-  let created_at = firebase.database.ServerValue.TIMESTAMP;
+  let created_at = new Date();
   auth
     .createUserWithEmailAndPassword(signupEmail, singupPassword)
     .then((userCredential) => {
+      alert("Account Created!");
+      var user = userCredential.user;
       db.collection("internal_users").add({
         email: signupEmail,
         full_name: full_name,
         role: role,
-        user_id: userID,
+        user_id: user.uid,
         created_at: created_at,
       });
-      alert("Account Created!");
-      var user = userCredential.user;
     });
 });
 
