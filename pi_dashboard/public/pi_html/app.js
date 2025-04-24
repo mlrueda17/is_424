@@ -39,7 +39,7 @@ document.getElementById("signupSubmitButton").addEventListener("click", (e) => {
     .then((userCredential) => {
       alert("Account Created!");
       var user = userCredential.user;
-      db.collection("internal_users").add({
+      db.collection("internal_users").doc(user.uid).set({
         email: signupEmail,
         full_name: full_name,
         role: role,
