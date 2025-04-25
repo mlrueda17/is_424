@@ -5,7 +5,7 @@
     "rewrites": [
       {
         "source": "**",
-        "destination": "/index.html"
+        "destination": "/pi_html/pi-dashboard.html"
       }
     ]
   }
