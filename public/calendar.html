@@ -3,9 +3,13 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cases</title>
+    <title>Calendar</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css"
       rel="stylesheet"
     />
     <link
@@ -30,7 +34,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" href="../pi-dashboard.html"
+              <a class="nav-link active" href="pi-dashboard.html"
                 ><i class="fas fa-home me-1"></i>Home</a
               >
             </li>
@@ -91,59 +95,8 @@
       </div>
     </nav>
     <div class="container mt-5">
-      <h2 class="mb-4">Cases Management</h2>
-
-      <!-- Case Form -->
-      <div class="card p-4 mb-4">
-        <h4>Add New Case</h4>
-        <form id="caseForm">
-          <div class="mb-3">
-            <label for="caseTitle" class="form-label">Case Title</label>
-            <input type="text" class="form-control" id="caseTitle" required />
-          </div>
-          <div class="mb-3">
-            <label for="caseDescription" class="form-label">Description</label>
-            <textarea
-              class="form-control"
-              id="caseDescription"
-              rows="3"
-              required
-            ></textarea>
-          </div>
-          <div class="mb-3">
-            <label for="caseStatus" class="form-label">Case Status</label>
-            <input
-              type="text"
-              class="form-control"
-              id="caseStatus"
-              required
-              placeholder="Active, Pending, or Complete"
-            />
-          </div>
-          <div class="mb-3">
-            <label for="caseClientEmail" class="form-label"
-              >Associated Client Email</label
-            >
-            <input
-              type="email"
-              class="form-control"
-              id="caseClientEmail"
-              required
-            />
-          </div>
-          <div class="mb-3">
-            <label for="caseDueDate" class="form-label">Case Due Date</label>
-            <input type="date" class="form-control" id="caseDueDate" required />
-          </div>
-          <button type="submit" class="btn btn-primary">Add Case</button>
-        </form>
-      </div>
-
-      <!-- Cases List -->
-      <div class="card p-4">
-        <h4>Cases List</h4>
-        <ul id="caseList" class="list-group mt-3"></ul>
-      </div>
+      <h2 class="mb-4">Dashboard Calendar</h2>
+      <div id="calendar"></div>
     </div>
 
     <!-- Login Modal -->
@@ -260,7 +213,22 @@
       </div>
     </div>
 
-    <!-- Bootstrap & Firebase Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        var calendarEl = document.getElementById("calendar");
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: "dayGridMonth",
+          events: [
+            {
+              title: "Example Event",
+              start: new Date().toISOString().split("T")[0],
+            },
+          ],
+        });
+        calendar.render();
+      });
+    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 
     <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
@@ -297,116 +265,5 @@
       let ref = firebase.storage().ref();
     </script>
     <script src="app.js"></script>
-    <script>
-      // Form submission for adding a new case
-      document
-        .getElementById("caseForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
-
-          const title = document.getElementById("caseTitle").value;
-          const description = document.getElementById("caseDescription").value;
-
-          if (title && description) {
-            // Add to Firestore
-            db.collection("cases")
-              .add({
-                title: title,
-                description: description,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-              })
-              .then(() => {
-                // Add the case to the UI
-                loadCases();
-
-                // Reset the form
-                document.getElementById("caseForm").reset();
-              })
-              .catch((error) => {
-                console.error("Error adding case:", error);
-              });
-          } else {
-            console.error("Title or description is missing!");
-          }
-        });
-
-      // Function to display cases
-      function loadCases() {
-        const caseList = document.getElementById("caseList");
-        caseList.innerHTML = ""; // Clear existing cases
-
-        db.collection("cases")
-          .orderBy("timestamp", "desc")
-          .get()
-          .then((querySnapshot) => {
-            if (querySnapshot.empty) {
-              caseList.innerHTML =
-                '<li class="list-group-item text-muted">No cases found</li>';
-            } else {
-              querySnapshot.forEach((doc) => {
-                const caseData = doc.data();
-                const caseId = doc.id;
-
-                // Create list item with Bootstrap styling
-                const listItem = document.createElement("li");
-                listItem.className = "list-group-item";
-
-                // Create case content with title, description, and delete button
-                listItem.innerHTML = `
-                <div class="d-flex justify-content-between align-items-start">
-                  <div>
-                    <strong>${caseData.title}</strong>
-                    <p class="mb-1">${caseData.description}</p>
-                    ${
-                      caseData.timestamp
-                        ? `<small class="text-muted">Added on ${caseData.timestamp
-                            .toDate()
-                            .toLocaleString()}</small>`
-                        : ""
-                    }
-                  </div>
-                  <button class="btn btn-sm btn-danger delete-case" data-id="${caseId}">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                </div>
-              `;
-
-                caseList.appendChild(listItem);
-              });
-
-              // Add event listeners to all delete buttons
-              document.querySelectorAll(".delete-case").forEach((button) => {
-                button.addEventListener("click", function () {
-                  const caseId = this.getAttribute("data-id");
-                  deleteCase(caseId);
-                });
-              });
-            }
-          })
-          .catch((error) => {
-            console.error("Error getting cases:", error);
-            caseList.innerHTML =
-              '<li class="list-group-item text-danger">Error loading cases</li>';
-          });
-      }
-
-      // Function to delete a case
-      function deleteCase(caseId) {
-        if (confirm("Are you sure you want to delete this case?")) {
-          db.collection("cases")
-            .doc(caseId)
-            .delete()
-            .then(() => {
-              console.log("Case successfully deleted!");
-              loadCases(); // Refresh the list
-            })
-            .catch((error) => {
-              console.error("Error removing case: ", error);
-            });
-        }
-      }
-
-      loadCases();
-    </script>
   </body>
 </html>

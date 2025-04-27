@@ -3,13 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Calendar</title>
+    <title>Client Page</title>
     <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css"
       rel="stylesheet"
     />
     <link
@@ -34,7 +30,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
           <ul class="navbar-nav">
             <li class="nav-item">
-              <a class="nav-link active" href="../pi-dashboard.html"
+              <a class="nav-link active" href="pi-dashboard.html"
                 ><i class="fas fa-home me-1"></i>Home</a
               >
             </li>
@@ -49,7 +45,7 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="calnder.html"
+              <a class="nav-link" href="calendar.html"
                 ><i class="fas fa-calendar me-1"></i>Schedule</a
               >
             </li>
@@ -95,8 +91,36 @@
       </div>
     </nav>
     <div class="container mt-5">
-      <h2 class="mb-4">Dashboard Calendar</h2>
-      <div id="calendar"></div>
+      <h2 class="mb-4">Client Management</h2>
+
+      <!-- Client Form -->
+      <div class="card p-4 mb-4">
+        <h4>Add New Client</h4>
+        <form id="clientForm">
+          <div class="mb-3">
+            <label for="clientName" class="form-label">Client Full Name</label>
+            <input type="text" class="form-control" id="clientName" required />
+          </div>
+          <div class="mb-3">
+            <label for="clientEmail" class="form-label"
+              >Client Email Address</label
+            >
+            <input
+              type="email"
+              class="form-control"
+              id="clientEmail"
+              required
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Add Client</button>
+        </form>
+      </div>
+
+      <!-- Client List -->
+      <div class="card p-4">
+        <h4>Client List</h4>
+        <ul id="clientList" class="list-group mt-3"></ul>
+      </div>
     </div>
 
     <!-- Login Modal -->
@@ -213,22 +237,26 @@
       </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
     <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        var calendarEl = document.getElementById("calendar");
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: "dayGridMonth",
-          events: [
-            {
-              title: "Example Event",
-              start: new Date().toISOString().split("T")[0],
-            },
-          ],
+      document
+        .getElementById("clientForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          let name = document.getElementById("clientName").value;
+          let email = document.getElementById("clientEmail").value;
+
+          if (name && email) {
+            let listItem = document.createElement("li");
+            listItem.className = "list-group-item";
+            listItem.textContent = `${name} - ${email}`;
+
+            document.getElementById("clientList").appendChild(listItem);
+            document.getElementById("clientForm").reset();
+          }
         });
-        calendar.render();
-      });
     </script>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 
     <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
