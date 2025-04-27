@@ -331,6 +331,7 @@
 
         db.collection("internal_users")
           .orderBy("timestamp", "desc")
+          .where("role", "==", "client")
           .get()
           .then((querySnapshot) => {
             if (querySnapshot.empty) {
