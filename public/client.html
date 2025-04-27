@@ -314,7 +314,7 @@
             })
             .then(() => {
               // Add the case to the UI
-              // loadCases();
+              loadClients();
 
               // Reset the form
               document.getElementById("clientForm").reset();
@@ -323,6 +323,54 @@
               console.error("Error adding client:", error);
             });
         });
+
+      // Function to display clients
+      function loadClients() {
+        const clientList = document.getElementById("clientList");
+        clientList.innerHTML = ""; // Clear existing cases
+
+        db.collection("internal_users")
+          .orderBy("timestamp", "desc")
+          .get()
+          .then((querySnapshot) => {
+            if (querySnapshot.empty) {
+              clientList.innerHTML =
+                '<li class="list-group-item text-muted">No clients found</li>';
+            } else {
+              querySnapshot.forEach((doc) => {
+                const clientData = doc.data();
+
+                // Create list item with Bootstrap styling
+                const listItem = document.createElement("li");
+                listItem.className = "list-group-item";
+
+                // Create client content with name and email
+                listItem.innerHTML = `
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <strong>${clientData.full_name}</strong>
+                    <p class="mb-1">Description: ${clientData.email}</p>
+                    ${
+                      clientData.timestamp
+                        ? `<small class="text-muted">Added on ${clientData.timestamp
+                            .toDate()
+                            .toLocaleString()}</small>`
+                        : ""
+                    }
+                  </div>
+                </div>
+              `;
+
+                clientList.appendChild(listItem);
+              });
+            }
+          })
+          .catch((error) => {
+            console.error("Error getting clients:", error);
+            clientList.innerHTML =
+              '<li class="list-group-item text-danger">Error loading cases</li>';
+          });
+      }
     </script>
   </body>
 </html>
