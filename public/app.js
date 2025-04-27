@@ -160,3 +160,21 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error("signupLink or signupModal not found!");
   }
 });
+// Quick actions new case to firebase
+document
+  .getElementById("newCaseSubmitButton")
+  .addEventListener("click", (e) => {
+    e.preventDefault();
+    let casetitle = document.getElementById("newCaseTitle").value;
+    let casedescription = document.getElementById("newCaseDescription").value;
+    let casestatus = document.getElementById("newCaseStatus").value;
+    let clientemail = "newCaseClientEmail";
+    let duedate = "newCaseDueDate";
+    db.collection("cases").doc(user.uid).set({
+      CaseTitle: casetitle,
+      CaseDescription: casedescription,
+      CaseStatus: casestatus,
+      ClientEmail: clientemail,
+      CaseDueDate: duedate,
+    });
+  });
