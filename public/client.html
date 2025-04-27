@@ -368,9 +368,10 @@
           .catch((error) => {
             console.error("Error getting clients:", error);
             clientList.innerHTML =
-              '<li class="list-group-item text-danger">Error loading cases</li>';
+              '<li class="list-group-item text-danger">Error loading clients</li>';
           });
       }
+      loadClients();
     </script>
   </body>
 </html>
