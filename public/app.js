@@ -33,7 +33,7 @@ document.getElementById("signupSubmitButton").addEventListener("click", (e) => {
   let singupPassword = document.getElementById("signupPassword").value;
   let full_name = document.getElementById("signupFullName").value;
   let role = "client";
-  let created_at = new Date();
+  let timestamp = new Date();
   auth
     .createUserWithEmailAndPassword(signupEmail, singupPassword)
     .then((userCredential) => {
@@ -44,7 +44,7 @@ document.getElementById("signupSubmitButton").addEventListener("click", (e) => {
         full_name: full_name,
         role: role,
         user_id: user.uid,
-        created_at: created_at,
+        timestamp: timestamp,
       });
     });
 });
