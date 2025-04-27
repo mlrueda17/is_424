@@ -237,7 +237,7 @@
       </div>
     </div>
 
-    <script>
+    <!-- <script>
       document
         .getElementById("clientForm")
         .addEventListener("submit", function (event) {
@@ -255,7 +255,7 @@
             document.getElementById("clientForm").reset();
           }
         });
-    </script>
+    </script> -->
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 
@@ -293,5 +293,36 @@
       let ref = firebase.storage().ref();
     </script>
     <script src="app.js"></script>
+    <script>
+      // Form submission for adding a new client
+      document
+        .getElementById("clientForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+
+          const full_name = document.getElementById("clientName").value;
+          const email = document.getElementById("clientEmail").value;
+
+          // Add to Firestore
+          db.collection("internal_users")
+            .add({
+              full_name: full_name,
+              email: email,
+              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+              role: "client",
+              note: "created by investigator",
+            })
+            .then(() => {
+              // Add the case to the UI
+              // loadCases();
+
+              // Reset the form
+              document.getElementById("clientForm").reset();
+            })
+            .catch((error) => {
+              console.error("Error adding client:", error);
+            });
+        });
+    </script>
   </body>
 </html>
