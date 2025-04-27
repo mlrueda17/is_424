@@ -168,8 +168,8 @@ document
     let casetitle = document.getElementById("newCaseTitle").value;
     let casedescription = document.getElementById("newCaseDescription").value;
     let casestatus = document.getElementById("newCaseStatus").value;
-    let clientemail = "newCaseClientEmail";
-    let duedate = "newCaseDueDate";
+    let clientemail = document.getElementById("newCaseClientEmail").value;
+    let duedate = document.getElementById("newCaseDueDate").value;
     db.collection("cases").doc(user.uid).set({
       CaseTitle: casetitle,
       CaseDescription: casedescription,
@@ -179,7 +179,7 @@ document
     });
   });
 
-// Quick actions Add client
+// Quick actions Add client to Firebase
 document
   .getElementById("newClientSubmitButton")
   .addEventListener("click", (e) => {
@@ -189,5 +189,19 @@ document
     db.collection("internal_users").doc(user.uid).set({
       ClientName: ClientFullName,
       ClientEmail: ClientEmail,
+    });
+  });
+
+document
+  .getElementById("newReportSubmitButton")
+  .addEventListener("click", (e) => {
+    e.preventDefault();
+    let reporttitle = document.getElementById("newReportTitle").value;
+    let reportcasetitle = document.getElementById("newReportCaseTitle").value;
+    let reportfilepath = document.getElementById("newReportFilePath").value;
+    db.collection("cases").doc(user.uid).set({
+      ReportTitle: reporttitle,
+      RelatedCaseTitle: reportcasetitle,
+      FilePath: reportfilepath,
     });
   });
