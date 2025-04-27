@@ -178,3 +178,16 @@ document
       CaseDueDate: duedate,
     });
   });
+
+// Quick actions Add client
+document
+  .getElementById("newClientSubmitButton")
+  .addEventListener("click", (e) => {
+    e.preventDefault();
+    let ClientFullName = document.getElementById("newClientFullName").value;
+    let ClientEmail = document.getElementById("newClientEmail").value;
+    db.collection("internal_users").doc(user.uid).set({
+      ClientName: ClientFullName,
+      ClientEmail: ClientEmail,
+    });
+  });
