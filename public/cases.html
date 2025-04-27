@@ -306,28 +306,33 @@
 
           const title = document.getElementById("caseTitle").value;
           const description = document.getElementById("caseDescription").value;
+          const status = document.getElementById("caseStatus").value;
+          const clientEmail = document.getElementById("caseClientEmail").value;
+          const dueDate = document.getElementById("caseDueDate").value;
+          const created_at = new Date();
+          const investigatorID = auth.currentUser.uid;
 
-          if (title && description) {
-            // Add to Firestore
-            db.collection("cases")
-              .add({
-                title: title,
-                description: description,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-              })
-              .then(() => {
-                // Add the case to the UI
-                loadCases();
+          // Add to Firestore
+          db.collection("cases")
+            .add({
+              title: title,
+              description: description,
+              status: status,
+              related_client: clientEmail,
+              due_date: dueDate,
+              date_created: created_at,
+              assigned_investigator: investigatorID,
+            })
+            .then(() => {
+              // Add the case to the UI
+              loadCases();
 
-                // Reset the form
-                document.getElementById("caseForm").reset();
-              })
-              .catch((error) => {
-                console.error("Error adding case:", error);
-              });
-          } else {
-            console.error("Title or description is missing!");
-          }
+              // Reset the form
+              document.getElementById("caseForm").reset();
+            })
+            .catch((error) => {
+              console.error("Error adding case:", error);
+            });
         });
 
       // Function to display cases
