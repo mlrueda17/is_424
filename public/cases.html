@@ -306,7 +306,11 @@
           .get();
 
         const mydocs = data.docs;
-        return mydocs[0].id;
+        if (mydocs.length > 0) {
+          return mydocs[0].id;
+        } else {
+          return null;
+        }
       }
       // Form submission for adding a new case
       document
