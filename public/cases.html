@@ -298,10 +298,20 @@
     </script>
     <script src="app.js"></script>
     <script>
+      // Find ID of client
+      async function findId(email) {
+        const data = await db
+          .collection("internal_users")
+          .where("email", "==", email)
+          .get();
+
+        const mydocs = data.docs;
+        return mydocs[0].id;
+      }
       // Form submission for adding a new case
       document
         .getElementById("caseForm")
-        .addEventListener("submit", function (event) {
+        .addEventListener("submit", async function (event) {
           event.preventDefault();
 
           const title = document.getElementById("caseTitle").value;
@@ -311,6 +321,7 @@
             document.getElementById("caseClientEmail").value;
           const status = document.getElementById("caseStatus").value;
           const assigned_investigator = auth.currentUser.uid;
+          const userID = await findId(related_client);
 
           if (title && description) {
             // Add to Firestore
@@ -323,6 +334,7 @@
                 status: status,
                 assigned_investigator: assigned_investigator,
                 related_client: related_client,
+                related_user_id: userID,
               })
               .then(() => {
                 // Add the case to the UI
