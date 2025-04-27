@@ -306,6 +306,11 @@
 
           const title = document.getElementById("caseTitle").value;
           const description = document.getElementById("caseDescription").value;
+          const due_date = document.getElementById("caseDueDate").value;
+          const related_client =
+            document.getElementById("caseClientEmail").value;
+          const status = document.getElementById("caseStatus").value;
+          const assigned_investigator = auth.currentUser.uid;
 
           if (title && description) {
             // Add to Firestore
@@ -313,7 +318,11 @@
               .add({
                 title: title,
                 description: description,
+                due_date: due_date,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                status: status,
+                assigned_investigator: assigned_investigator,
+                related_client: related_client,
               })
               .then(() => {
                 // Add the case to the UI
@@ -356,7 +365,10 @@
                 <div class="d-flex justify-content-between align-items-start">
                   <div>
                     <strong>${caseData.title}</strong>
-                    <p class="mb-1">${caseData.description}</p>
+                    <p class="mb-1">Description: ${caseData.description}</p>
+                    <p class="mb-1">Status: ${caseData.status}</p>
+                    <p class="mb-1">Due Date: ${caseData.due_date}</p>
+                    <p class="mb-1">Client: ${caseData.related_client}</p>
                     ${
                       caseData.timestamp
                         ? `<small class="text-muted">Added on ${caseData.timestamp
