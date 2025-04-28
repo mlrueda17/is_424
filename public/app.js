@@ -212,10 +212,18 @@ document
     e.preventDefault();
     let ClientFullName = document.getElementById("newClientFullName").value;
     let ClientEmail = document.getElementById("newClientEmail").value;
-    db.collection("internal_users").add({
-      ClientName: ClientFullName,
-      ClientEmail: ClientEmail,
-    });
+    db.collection("internal_users")
+      .add({
+        full_name: ClientFullName,
+        email: ClientEmail,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        role: "client",
+        note: "created by investigator",
+      })
+      .then(() => {
+        document.getElementById("newClientForm").reset();
+        alert("New Client Added!");
+      });
   });
 
 document
