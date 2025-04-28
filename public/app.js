@@ -233,10 +233,17 @@ document
     let reporttitle = document.getElementById("newReportTitle").value;
     let reportcasetitle = document.getElementById("newReportCaseTitle").value;
     let reportfilepath = document.getElementById("newReportFilePath").value;
-    db.collection("reports").add({
-      ReportTitle: reporttitle,
-      RelatedCaseTitle: reportcasetitle,
-      FilePath: reportfilepath,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-    });
+    let generated_by = auth.currentUser.uid;
+    db.collection("reports")
+      .add({
+        report_title: reporttitle,
+        related_case_title: reportcasetitle,
+        file_path: reportfilepath,
+        generated_by: generated_by,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      })
+      .then(() => {
+        document.getElementById("newReportForm").reset();
+        alert("New Report Added!");
+      });
   });
