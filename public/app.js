@@ -237,5 +237,6 @@ document
       ReportTitle: reporttitle,
       RelatedCaseTitle: reportcasetitle,
       FilePath: reportfilepath,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
   });
