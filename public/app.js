@@ -200,7 +200,8 @@ document
         related_user_id: userID,
       })
       .then(() => {
-        document.getElementById("caseForm").reset();
+        document.getElementById("newCaseForm").reset();
+        alert("New Case Added!");
       });
   });
 
