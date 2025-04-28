@@ -171,11 +171,11 @@ document
     let clientemail = document.getElementById("newCaseClientEmail").value;
     let duedate = document.getElementById("newCaseDueDate").value;
     db.collection("cases").add({
-      CaseTitle: casetitle,
-      CaseDescription: casedescription,
-      CaseStatus: casestatus,
-      ClientEmail: clientemail,
-      CaseDueDate: duedate,
+      title: casetitle,
+      description: casedescription,
+      status: casestatus,
+      related_client: clientemail,
+      due_date: duedate,
     });
   });
 
