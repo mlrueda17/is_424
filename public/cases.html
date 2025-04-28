@@ -312,6 +312,7 @@
           return null;
         }
       }
+
       // Form submission for adding a new case
       document
         .getElementById("caseForm")
@@ -320,19 +321,20 @@
 
           const title = document.getElementById("caseTitle").value;
           const description = document.getElementById("caseDescription").value;
+          const due_date = document.getElementById("caseDueDate").value;
+          const related_client =
+            document.getElementById("caseClientEmail").value;
           const status = document.getElementById("caseStatus").value;
-          const clientEmail = document.getElementById("caseClientEmail").value;
-          const dueDate = document.getElementById("caseDueDate").value;
+          const assigned_investigator = auth.currentUser.uid;
+          const userID = await findId(related_client);
 
-          if (title && description && status && clientEmail && dueDate) {
+          if (title && description) {
             // Add to Firestore
             db.collection("cases")
               .add({
                 title: title,
                 description: description,
-                status: status,
-                clientEmail: clientEmail,
-                dueDate: dueDate,
+                due_date: due_date,
                 timestamp: firebase.firestore.FieldValue.serverTimestamp(),
                 status: status,
                 assigned_investigator: assigned_investigator,
@@ -350,7 +352,7 @@
                 console.error("Error adding case:", error);
               });
           } else {
-            alert("Please fill out all required fields!");
+            console.error("Please fill out all required fields!");
           }
         });
 

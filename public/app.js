@@ -176,6 +176,7 @@ document
       status: casestatus,
       related_client: clientemail,
       due_date: duedate,
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
     });
   });
 
