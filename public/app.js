@@ -170,7 +170,7 @@ document
     let casestatus = document.getElementById("newCaseStatus").value;
     let clientemail = document.getElementById("newCaseClientEmail").value;
     let duedate = document.getElementById("newCaseDueDate").value;
-    db.collection("cases").doc(user.uid).set({
+    db.collection("cases").add({
       CaseTitle: casetitle,
       CaseDescription: casedescription,
       CaseStatus: casestatus,
@@ -186,7 +186,7 @@ document
     e.preventDefault();
     let ClientFullName = document.getElementById("newClientFullName").value;
     let ClientEmail = document.getElementById("newClientEmail").value;
-    db.collection("internal_users").doc(user.uid).set({
+    db.collection("internal_users").add({
       ClientName: ClientFullName,
       ClientEmail: ClientEmail,
     });
@@ -199,7 +199,7 @@ document
     let reporttitle = document.getElementById("newReportTitle").value;
     let reportcasetitle = document.getElementById("newReportCaseTitle").value;
     let reportfilepath = document.getElementById("newReportFilePath").value;
-    db.collection("cases").doc(user.uid).set({
+    db.collection("reports").add({
       ReportTitle: reporttitle,
       RelatedCaseTitle: reportcasetitle,
       FilePath: reportfilepath,
