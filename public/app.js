@@ -268,5 +268,13 @@ function solvedCases() {
   db.collection("cases")
     .where("status", "==", "Complete")
     .get()
-    .then(() => {});
+    .then((data) => {
+      mydocs = data.docs;
+      solved_cases = mydocs.length;
+      console.log(solved_cases);
+      document.getElementById("solvedCases").innerHTML = "";
+      document.getElementById("solvedCases").innerHTML = solved_cases;
+    });
 }
+
+solvedCases();
