@@ -247,3 +247,26 @@ document
         alert("New Report Added!");
       });
   });
+
+// Find active cases
+function activeCases() {
+  db.collection("cases")
+    .where("status", "==", "Active")
+    .get()
+    .then((data) => {
+      mydocs = data.docs;
+      active_cases = mydocs.length;
+      document.getElementById("activeCases").innerHTML = "";
+      document.getElementById("activeCases").innerHTML = active_cases;
+    });
+}
+
+activeCases();
+
+// Find solved cases
+function solvedCases() {
+  db.collection("cases")
+    .where("status", "==", "Complete")
+    .get()
+    .then(() => {});
+}
