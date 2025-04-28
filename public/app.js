@@ -188,16 +188,20 @@ document
     let duedate = document.getElementById("newCaseDueDate").value;
     let assigned_investigator = auth.currentUser.uid;
     let userID = await findId(clientemail);
-    db.collection("cases").add({
-      title: casetitle,
-      description: casedescription,
-      status: casestatus,
-      related_client: clientemail,
-      due_date: duedate,
-      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-      assigned_investigator: assigned_investigator,
-      related_user_id: userID,
-    });
+    db.collection("cases")
+      .add({
+        title: casetitle,
+        description: casedescription,
+        status: casestatus,
+        related_client: clientemail,
+        due_date: duedate,
+        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        assigned_investigator: assigned_investigator,
+        related_user_id: userID,
+      })
+      .then(() => {
+        document.getElementById("caseForm").reset();
+      });
   });
 
 // Quick actions Add client to Firebase
