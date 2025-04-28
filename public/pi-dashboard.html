@@ -13,7 +13,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
   </head>
   <body class="bg-light">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -37,18 +37,18 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="casses.html"
-                ><i class="fas fa-folder me-1"></i>Cases</a
+              <a class="nav-link" href="cases.html">
+                <i class="fas fa-folder me-1"></i>Cases</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="client.html"
-                ><i class="fas fa-users me-1"></i>Clients</a
+              <a class="nav-link" href="client.html">
+                <i class="fas fa-users me-1"></i>Clients</a
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="calnder.html"
-                ><i class="fas fa-calendar me-1"></i>Schedule</a
+              <a class="nav-link" href="calendar.html">
+                <i class="fas fa-calendar me-1"></i>Schedule</a
               >
             </li>
           </ul>
@@ -93,7 +93,7 @@
       </div>
     </nav>
     <!-- Notification Modal -->
-    <div id="notificationModal" class="notifiacation-modal">
+    <div id="notificationModal" class="notification-modal">
       <div class="modal-content">
         <span class="close">&times;</span>
         <p>You have new notifications!</p>
@@ -686,7 +686,7 @@
                 <input
                   type="text"
                   class="form-control"
-                  id="newCaseDescription"
+                  id="newCaseStatus"
                   placeholder="Active, Pending, or Complete"
                   required
                 />
@@ -712,7 +712,7 @@
               <button
                 type="submit"
                 class="btn btn-primary w-100"
-                id="signupSubmitButton"
+                id="newCaseSubmitButton"
               >
                 Sign Up
               </button>
@@ -764,7 +764,7 @@
               <button
                 type="submit"
                 class="btn btn-primary w-100"
-                id="signupSubmitButton"
+                id="newClientSubmitButton"
               >
                 Sign Up
               </button>
@@ -826,7 +826,7 @@
               <button
                 type="submit"
                 class="btn btn-primary w-100"
-                id="signupSubmitButton"
+                id="newReportSubmitButton"
               >
                 Sign Up
               </button>

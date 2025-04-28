@@ -31,11 +31,21 @@ document.getElementById("signupSubmitButton").addEventListener("click", (e) => {
   e.preventDefault();
   let signupEmail = document.getElementById("signupEmail").value;
   let singupPassword = document.getElementById("signupPassword").value;
+  let full_name = document.getElementById("signupFullName").value;
+  let role = "client";
+  let timestamp = new Date();
   auth
     .createUserWithEmailAndPassword(signupEmail, singupPassword)
     .then((userCredential) => {
       alert("Account Created!");
       var user = userCredential.user;
+      db.collection("internal_users").doc(user.uid).set({
+        email: signupEmail,
+        full_name: full_name,
+        role: role,
+        user_id: user.uid,
+        timestamp: timestamp,
+      });
     });
 });
 
@@ -103,21 +113,21 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 });
 
-// // New Case modal
-// document.addEventListener("DOMContentLoaded", function () {
-//   const newCaseButton = document.getElementById("newCaseButton");
-//   const newCaseModal = document.getElementById("newCaseModal");
+// New Case modal
+document.addEventListener("DOMContentLoaded", function () {
+  const newCaseButton = document.getElementById("newCaseButton");
+  const newCaseModal = document.getElementById("newCaseModal");
 
-//   if (newCaseButton && newCaseModal) {
-//     newCaseButton.addEventListener("click", function (event) {
-//       event.preventDefault();
-//       const modal = bootstrap.Modal.getOrCreateInstance(newCaseModal);
-//       modal.show();
-//     });
-//   } else {
-//     console.error("signupLink or signupModal not found!");
-//   }
-// });
+  if (newCaseButton && newCaseModal) {
+    newCaseButton.addEventListener("click", function (event) {
+      event.preventDefault();
+      const modal = bootstrap.Modal.getOrCreateInstance(newCaseModal);
+      modal.show();
+    });
+  } else {
+    console.error("signupLink or signupModal not found!");
+  }
+});
 
 // New Client modal
 document.addEventListener("DOMContentLoaded", function () {
@@ -150,3 +160,48 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error("signupLink or signupModal not found!");
   }
 });
+// Quick actions new case to firebase
+document
+  .getElementById("newCaseSubmitButton")
+  .addEventListener("click", (e) => {
+    e.preventDefault();
+    let casetitle = document.getElementById("newCaseTitle").value;
+    let casedescription = document.getElementById("newCaseDescription").value;
+    let casestatus = document.getElementById("newCaseStatus").value;
+    let clientemail = document.getElementById("newCaseClientEmail").value;
+    let duedate = document.getElementById("newCaseDueDate").value;
+    db.collection("cases").doc(user.uid).set({
+      CaseTitle: casetitle,
+      CaseDescription: casedescription,
+      CaseStatus: casestatus,
+      ClientEmail: clientemail,
+      CaseDueDate: duedate,
+    });
+  });
+
+// Quick actions Add client to Firebase
+document
+  .getElementById("newClientSubmitButton")
+  .addEventListener("click", (e) => {
+    e.preventDefault();
+    let ClientFullName = document.getElementById("newClientFullName").value;
+    let ClientEmail = document.getElementById("newClientEmail").value;
+    db.collection("internal_users").doc(user.uid).set({
+      ClientName: ClientFullName,
+      ClientEmail: ClientEmail,
+    });
+  });
+
+document
+  .getElementById("newReportSubmitButton")
+  .addEventListener("click", (e) => {
+    e.preventDefault();
+    let reporttitle = document.getElementById("newReportTitle").value;
+    let reportcasetitle = document.getElementById("newReportCaseTitle").value;
+    let reportfilepath = document.getElementById("newReportFilePath").value;
+    db.collection("cases").doc(user.uid).set({
+      ReportTitle: reporttitle,
+      RelatedCaseTitle: reportcasetitle,
+      FilePath: reportfilepath,
+    });
+  });
