@@ -160,16 +160,34 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error("signupLink or signupModal not found!");
   }
 });
+
+// Find ID of client
+async function findId(email) {
+  const data = await db
+    .collection("internal_users")
+    .where("email", "==", email)
+    .get();
+
+  const mydocs = data.docs;
+  if (mydocs.length > 0) {
+    return mydocs[0].id;
+  } else {
+    return null;
+  }
+}
+
 // Quick actions new case to firebase
 document
   .getElementById("newCaseSubmitButton")
-  .addEventListener("click", (e) => {
+  .addEventListener("click", async function (e) {
     e.preventDefault();
     let casetitle = document.getElementById("newCaseTitle").value;
     let casedescription = document.getElementById("newCaseDescription").value;
     let casestatus = document.getElementById("newCaseStatus").value;
     let clientemail = document.getElementById("newCaseClientEmail").value;
     let duedate = document.getElementById("newCaseDueDate").value;
+    let assigned_investigator = auth.currentUser.uid;
+    let userID = await findId(clientemail);
     db.collection("cases").add({
       title: casetitle,
       description: casedescription,
@@ -177,6 +195,8 @@ document
       related_client: clientemail,
       due_date: duedate,
       timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+      assigned_investigator: assigned_investigator,
+      related_user_id: userID,
     });
   });
 
