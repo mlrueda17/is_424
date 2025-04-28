@@ -278,3 +278,18 @@ function solvedCases() {
 }
 
 solvedCases();
+
+// Find active clients
+function activeClients() {
+  db.collection("internal_users")
+    .where("role", "==", "client")
+    .get()
+    .then((data) => {
+      mydocs = data.docs;
+      active_clients = mydocs.length;
+      document.getElementById("activeClients").innerHTML = "";
+      document.getElementById("activeClients").innerHTML = active_clients;
+    });
+}
+
+activeClients();
