@@ -323,7 +323,7 @@ function recentCases() {
 
   db.collection("cases")
     .orderBy("timestamp", "desc")
-    .limit(3)
+    .limit(5)
     .get()
     .then((querySnapshot) => {
       if (querySnapshot.empty) {
