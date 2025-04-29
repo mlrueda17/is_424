@@ -271,7 +271,6 @@ function solvedCases() {
     .then((data) => {
       mydocs = data.docs;
       solved_cases = mydocs.length;
-      console.log(solved_cases);
       document.getElementById("solvedCases").innerHTML = "";
       document.getElementById("solvedCases").innerHTML = solved_cases;
     });
@@ -293,3 +292,21 @@ function activeClients() {
 }
 
 activeClients();
+
+function pendingReports() {
+  db.collection("cases")
+    .where("description", "==", "new date test")
+    .get()
+    .then((data) => {
+      mydocs = data.docs;
+      mydocs.forEach((d) => {
+        due_date = d.data().due_date.toDate();
+        current_date = new Date();
+        console.log(due_date);
+        console.log(current_date);
+        console.log(due_date - current_date);
+        // Week in milliseconds: 604,800,000
+      });
+    });
+}
+pendingReports();

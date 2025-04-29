@@ -321,7 +321,9 @@
 
           const title = document.getElementById("caseTitle").value;
           const description = document.getElementById("caseDescription").value;
-          const due_date = document.getElementById("caseDueDate").value;
+          const due_date = new Date(
+            document.getElementById("caseDueDate").value
+          );
           const related_client =
             document.getElementById("caseClientEmail").value;
           const status = document.getElementById("caseStatus").value;
@@ -384,15 +386,13 @@
                     <strong>${caseData.title}</strong>
                     <p class="mb-1">Description: ${caseData.description}</p>
                     <p class="mb-1">Status: ${caseData.status}</p>
-                    <p class="mb-1">Due Date: ${caseData.due_date}</p>
+                    <p class="mb-1">Due Date: ${caseData.due_date
+                      .toDate()
+                      .toLocaleDateString()}</p>
                     <p class="mb-1">Client: ${caseData.related_client}</p>
-                    ${
-                      caseData.timestamp
-                        ? `<small class="text-muted">Added on ${caseData.timestamp
-                            .toDate()
-                            .toLocaleString()}</small>`
-                        : ""
-                    }
+                    <small class="text-muted">Added on: ${caseData.timestamp
+                      .toDate()
+                      .toLocaleString()}</small>  
                   </div>
                   <button class="btn btn-sm btn-danger delete-case" data-id="${caseId}">
                     <i class="fas fa-trash"></i>
