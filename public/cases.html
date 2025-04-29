@@ -327,7 +327,8 @@
           const related_client =
             document.getElementById("caseClientEmail").value;
           const status = document.getElementById("caseStatus").value;
-          const assigned_investigator = auth.currentUser.uid;
+          const assigned_investigator_id = auth.currentUser.uid;
+          const assigned_investigator_email = auth.currentUser.email;
           const userID = await findId(related_client);
 
           if (title && description) {
@@ -339,7 +340,8 @@
                 due_date: due_date,
                 timestamp: new Date(),
                 status: status,
-                assigned_investigator: assigned_investigator,
+                assigned_investigator: assigned_investigator_email,
+                assigned_investigator_id: assigned_investigator_id,
                 related_client: related_client,
                 related_user_id: userID,
               })
@@ -390,6 +392,9 @@
                       .toDate()
                       .toLocaleDateString()}</p>
                     <p class="mb-1">Client: ${caseData.related_client}</p>
+                    <p class="mb-1">Investigator: ${
+                      caseData.assigned_investigator
+                    }</p>
                     <small class="text-muted">Added on: ${caseData.timestamp
                       .toDate()
                       .toLocaleString()}</small>  
