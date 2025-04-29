@@ -266,6 +266,8 @@ function activeCases() {
       active_cases = mydocs.length;
       document.getElementById("activeCases").innerHTML = "";
       document.getElementById("activeCases").innerHTML = active_cases;
+      document.getElementById("caseProgressReminder").innerHTML = "";
+      document.getElementById("caseProgressReminder").innerHTML = active_cases;
     });
 }
 
@@ -281,6 +283,8 @@ function solvedCases() {
       solved_cases = mydocs.length;
       document.getElementById("solvedCases").innerHTML = "";
       document.getElementById("solvedCases").innerHTML = solved_cases;
+      document.getElementById("clientMeetingReminder").innerHTML = "";
+      document.getElementById("clientMeetingReminder").innerHTML = solved_cases;
     });
 }
 
@@ -312,6 +316,8 @@ function pendingReports() {
       due_soon = mydocs.length;
       document.getElementById("pendingReports").innerHTML = "";
       document.getElementById("pendingReports").innerHTML = due_soon;
+      document.getElementById("pendingReportReminder").innerHTML = "";
+      document.getElementById("pendingReportReminder").innerHTML = due_soon;
     });
 }
 pendingReports();
