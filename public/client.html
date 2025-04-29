@@ -325,7 +325,7 @@
             .add({
               full_name: full_name,
               email: email,
-              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+              timestamp: new Date(),
               role: "client",
               note: "created by investigator",
             })
@@ -368,13 +368,9 @@
                   <div>
                     <strong>${clientData.full_name}</strong>
                     <p class="mb-1">Description: ${clientData.email}</p>
-                    ${
-                      clientData.timestamp
-                        ? `<small class="text-muted">Added on ${clientData.timestamp
-                            .toDate()
-                            .toLocaleString()}</small>`
-                        : ""
-                    }
+                    <small class="text-muted">Added on: ${clientData.timestamp
+                      .toDate()
+                      .toLocaleString()}</small>
                   </div>
                 </div>
               `;

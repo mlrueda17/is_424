@@ -5,11 +5,31 @@ auth.onAuthStateChanged((user) => {
     document.getElementById("loginLink").classList.add("d-none");
     document.getElementById("signupLink").classList.add("d-none");
     document.getElementById("signoutLink").classList.remove("d-none");
+    document.getElementById("activeCases").innerHTML = "";
+    document.getElementById("solvedCases").innerHTML = "";
+    document.getElementById("activeClients").innerHTML = "";
+    document.getElementById("pendingReports").innerHTML = "";
+    document.getElementById("recentCasesList").innerHTML = "";
+    activeCases();
+    solvedCases();
+    activeClients();
+    pendingReports();
+    recentCases();
   } else {
     console.log("No user is logged in");
     document.getElementById("loginLink").classList.remove("d-none");
     document.getElementById("signupLink").classList.remove("d-none");
     document.getElementById("signoutLink").classList.add("d-none");
+    document.getElementById("activeCases").innerHTML = "";
+    document.getElementById("solvedCases").innerHTML = "";
+    document.getElementById("activeClients").innerHTML = "";
+    document.getElementById("pendingReports").innerHTML = "";
+    document.getElementById("recentCasesList").innerHTML = "";
+    activeCases();
+    solvedCases();
+    activeClients();
+    pendingReports();
+    recentCases();
   }
 });
 
@@ -160,23 +180,51 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error("signupLink or signupModal not found!");
   }
 });
+
+// Find ID of client
+async function findId(email) {
+  const data = await db
+    .collection("internal_users")
+    .where("email", "==", email)
+    .get();
+
+  const mydocs = data.docs;
+  if (mydocs.length > 0) {
+    return mydocs[0].id;
+  } else {
+    return null;
+  }
+}
+
 // Quick actions new case to firebase
 document
   .getElementById("newCaseSubmitButton")
-  .addEventListener("click", (e) => {
+  .addEventListener("click", async function (e) {
     e.preventDefault();
     let casetitle = document.getElementById("newCaseTitle").value;
     let casedescription = document.getElementById("newCaseDescription").value;
     let casestatus = document.getElementById("newCaseStatus").value;
     let clientemail = document.getElementById("newCaseClientEmail").value;
-    let duedate = document.getElementById("newCaseDueDate").value;
-    db.collection("cases").doc(user.uid).set({
-      CaseTitle: casetitle,
-      CaseDescription: casedescription,
-      CaseStatus: casestatus,
-      ClientEmail: clientemail,
-      CaseDueDate: duedate,
-    });
+    let duedate = new Date(document.getElementById("newCaseDueDate").value);
+    let assigned_investigator_email = auth.currentUser.email;
+    let assigned_investigator_id = auth.currentUser.uid;
+    let userID = await findId(clientemail);
+    db.collection("cases")
+      .add({
+        title: casetitle,
+        description: casedescription,
+        status: casestatus,
+        related_client: clientemail,
+        due_date: duedate,
+        timestamp: new Date(),
+        assigned_investigator: assigned_investigator_email,
+        assigned_investigator_id: assigned_investigator_id,
+        related_user_id: userID,
+      })
+      .then(() => {
+        document.getElementById("newCaseForm").reset();
+        alert("New Case Added!");
+      });
   });
 
 // Quick actions Add client to Firebase
@@ -186,10 +234,18 @@ document
     e.preventDefault();
     let ClientFullName = document.getElementById("newClientFullName").value;
     let ClientEmail = document.getElementById("newClientEmail").value;
-    db.collection("internal_users").doc(user.uid).set({
-      ClientName: ClientFullName,
-      ClientEmail: ClientEmail,
-    });
+    db.collection("internal_users")
+      .add({
+        full_name: ClientFullName,
+        email: ClientEmail,
+        timestamp: new Date(),
+        role: "client",
+        note: "created by investigator",
+      })
+      .then(() => {
+        document.getElementById("newClientForm").reset();
+        alert("New Client Added!");
+      });
   });
 
 document
@@ -199,9 +255,119 @@ document
     let reporttitle = document.getElementById("newReportTitle").value;
     let reportcasetitle = document.getElementById("newReportCaseTitle").value;
     let reportfilepath = document.getElementById("newReportFilePath").value;
-    db.collection("cases").doc(user.uid).set({
-      ReportTitle: reporttitle,
-      RelatedCaseTitle: reportcasetitle,
-      FilePath: reportfilepath,
-    });
+    let generated_by = auth.currentUser.uid;
+    db.collection("reports")
+      .add({
+        report_title: reporttitle,
+        related_case_title: reportcasetitle,
+        file_path: reportfilepath,
+        generated_by: generated_by,
+        timestamp: new Date(),
+      })
+      .then(() => {
+        document.getElementById("newReportForm").reset();
+        alert("New Report Added!");
+      });
   });
+
+// Find active cases
+function activeCases() {
+  db.collection("cases")
+    .where("status", "==", "Active")
+    .get()
+    .then((data) => {
+      mydocs = data.docs;
+      active_cases = mydocs.length;
+      document.getElementById("activeCases").innerHTML = "";
+      document.getElementById("activeCases").innerHTML = active_cases;
+    });
+}
+
+activeCases();
+
+// Find solved cases
+function solvedCases() {
+  db.collection("cases")
+    .where("status", "==", "Complete")
+    .get()
+    .then((data) => {
+      mydocs = data.docs;
+      solved_cases = mydocs.length;
+      document.getElementById("solvedCases").innerHTML = "";
+      document.getElementById("solvedCases").innerHTML = solved_cases;
+    });
+}
+
+solvedCases();
+
+// Find active clients
+function activeClients() {
+  db.collection("internal_users")
+    .where("role", "==", "client")
+    .get()
+    .then((data) => {
+      mydocs = data.docs;
+      active_clients = mydocs.length;
+      document.getElementById("activeClients").innerHTML = "";
+      document.getElementById("activeClients").innerHTML = active_clients;
+    });
+}
+
+activeClients();
+
+function pendingReports() {
+  let week_from_now = new Date(Date.now() + 604800000);
+
+  db.collection("cases")
+    .where("due_date", "<", week_from_now)
+    .get()
+    .then((data) => {
+      mydocs = data.docs;
+      due_soon = mydocs.length;
+      document.getElementById("pendingReports").innerHTML = "";
+      document.getElementById("pendingReports").innerHTML = due_soon;
+    });
+}
+pendingReports();
+
+// Display cases on main page
+function recentCases() {
+  const recentCaseList = document.getElementById("recentCasesList");
+  recentCaseList.innerHTML = ""; // Clear existing cases
+
+  db.collection("cases")
+    .orderBy("timestamp", "desc")
+    .limit(3)
+    .get()
+    .then((querySnapshot) => {
+      if (querySnapshot.empty) {
+        recentCaseList.innerHTML =
+          '<li class="list-group-item text-muted">No cases found</li>';
+      } else {
+        querySnapshot.forEach((doc) => {
+          const caseData = doc.data();
+          const caseId = doc.id;
+
+          // Create list item with Bootstrap styling
+          const tableRow = document.createElement("tr");
+
+          // Create case content with title, description, and delete button
+          tableRow.innerHTML = `
+                    <td>${caseId}</td>
+                    <td>${caseData.title}</td>
+                    <td>${caseData.related_client}</td>
+                    <td>${caseData.assigned_investigator}</td>
+                    <td>${caseData.status}</td>
+                    <td>${caseData.due_date.toDate().toLocaleDateString()}</td>
+        `;
+
+          recentCaseList.appendChild(tableRow);
+        });
+      }
+    })
+    .catch((error) => {
+      console.error("Error getting cases:", error);
+      recentCaseList.innerHTML =
+        '<li class="list-group-item text-danger">Error loading cases</li>';
+    });
+}

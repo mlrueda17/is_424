@@ -13,7 +13,7 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="assets/css/style.css" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body class="bg-light">
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -75,7 +75,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" id="loginLink"
-                ><i class="fas fa-user me-1"></i>Profile</a
+                ><i class="fas fa-user me-1"></i>Log in</a
               >
             </li>
             <li class="nav-item">
@@ -104,6 +104,7 @@
         </ul>
       </div>
     </div>
+
     <div class="container-fluid py-4">
       <div class="row g-4">
         <!-- Statistics Cards -->
@@ -111,7 +112,7 @@
           <div class="card bg-primary text-white">
             <div class="card-body">
               <h5 class="card-title">Active Cases</h5>
-              <h2>12</h2>
+              <h2 id="activeCases">0</h2>
               <p class="mb-0">
                 <i class="fas fa-arrow-up me-1"></i>3 new this week
               </p>
@@ -122,7 +123,7 @@
           <div class="card bg-success text-white">
             <div class="card-body">
               <h5 class="card-title">Solved Cases</h5>
-              <h2>148</h2>
+              <h2 id="solvedCases"></h2>
               <p class="mb-0"><i class="fas fa-check me-1"></i>4 this month</p>
             </div>
           </div>
@@ -131,7 +132,7 @@
           <div class="card bg-warning text-white">
             <div class="card-body">
               <h5 class="card-title">Pending Reports</h5>
-              <h2>7</h2>
+              <h2 id="pendingReports"></h2>
               <p class="mb-0"><i class="fas fa-clock me-1"></i>Due this week</p>
             </div>
           </div>
@@ -140,7 +141,7 @@
           <div class="card bg-info text-white">
             <div class="card-body">
               <h5 class="card-title">Active Clients</h5>
-              <h2>28</h2>
+              <h2 id="activeClients"></h2>
               <p class="mb-0">
                 <i class="fas fa-users me-1"></i>2 new this month
               </p>
@@ -227,36 +228,29 @@
               <table class="table table-hover">
                 <thead>
                   <tr>
-                    <th>Case ID <i class="fas fa-sort"></i></th>
-                    <th>Client <i class="fas fa-sort"></i></th>
-                    <th>Type <i class="fas fa-sort"></i></th>
-                    <th>Status <i class="fas fa-sort"></i></th>
-                    <th>Progress</th>
-                    <th>Actions</th>
+                    <th>Case ID</th>
+                    <th>Title</th>
+                    <th>Client</th>
+                    <th>Investigator</th>
+                    <th>Status</th>
+                    <th>Due Date</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody id="recentCasesList">
                   <tr>
                     <td>#PI-2025-001</td>
-                    <td>
-                      <img
-                        src="/api/placeholder/32/32"
-                        class="rounded-circle me-2"
-                        alt="Profile"
-                      />
-                      John Smith
-                    </td>
+                    <td>John Smith</td>
                     <td>Background Check</td>
                     <td><span class="badge bg-success">Active</span></td>
-                    <td>
+                    <!-- <td>
                       <div class="progress" style="height: 5px">
                         <div
                           class="progress-bar bg-success"
                           style="width: 70%"
                         ></div>
                       </div>
-                    </td>
-                    <td>
+                    </td> -->
+                    <!-- <td>
                       <div class="btn-group">
                         <button class="btn btn-sm btn-primary">
                           <i class="fas fa-edit"></i>
@@ -287,29 +281,22 @@
                           </li>
                         </ul>
                       </div>
-                    </td>
+                    </td> -->
                   </tr>
                   <tr>
                     <td>#PI-2025-002</td>
-                    <td>
-                      <img
-                        src="/api/placeholder/32/32"
-                        class="rounded-circle me-2"
-                        alt="Profile"
-                      />
-                      Sarah Johnson
-                    </td>
+                    <td>Sarah Johnson</td>
                     <td>Surveillance</td>
                     <td><span class="badge bg-warning">Pending</span></td>
-                    <td>
+                    <!-- <td>
                       <div class="progress" style="height: 5px">
                         <div
                           class="progress-bar bg-warning"
                           style="width: 45%"
                         ></div>
                       </div>
-                    </td>
-                    <td>
+                    </td> -->
+                    <!-- <td>
                       <div class="btn-group">
                         <button class="btn btn-sm btn-primary">
                           <i class="fas fa-edit"></i>
@@ -340,7 +327,7 @@
                           </li>
                         </ul>
                       </div>
-                    </td>
+                    </td> -->
                   </tr>
                 </tbody>
               </table>
@@ -662,7 +649,7 @@
             ></button>
           </div>
           <div class="modal-body">
-            <form>
+            <form id="newCaseForm">
               <div class="mb-3">
                 <label class="form-label">Case Title</label>
                 <input
@@ -714,7 +701,7 @@
                 class="btn btn-primary w-100"
                 id="newCaseSubmitButton"
               >
-                Sign Up
+                Add New Case
               </button>
             </form>
           </div>
@@ -742,7 +729,7 @@
             ></button>
           </div>
           <div class="modal-body">
-            <form>
+            <form id="newClientForm">
               <div class="mb-3">
                 <label class="form-label">Client Full Name</label>
                 <input
@@ -766,7 +753,7 @@
                 class="btn btn-primary w-100"
                 id="newClientSubmitButton"
               >
-                Sign Up
+                Add New Client
               </button>
             </form>
           </div>
@@ -794,7 +781,7 @@
             ></button>
           </div>
           <div class="modal-body">
-            <form>
+            <form id="newReportForm">
               <div class="mb-3">
                 <label class="form-label">Report Title</label>
                 <input
@@ -828,7 +815,7 @@
                 class="btn btn-primary w-100"
                 id="newReportSubmitButton"
               >
-                Sign Up
+                Add New Report
               </button>
             </form>
           </div>

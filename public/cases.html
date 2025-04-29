@@ -312,6 +312,7 @@
           return null;
         }
       }
+
       // Form submission for adding a new case
       document
         .getElementById("caseForm")
@@ -320,22 +321,27 @@
 
           const title = document.getElementById("caseTitle").value;
           const description = document.getElementById("caseDescription").value;
+          const due_date = new Date(
+            document.getElementById("caseDueDate").value
+          );
+          const related_client =
+            document.getElementById("caseClientEmail").value;
           const status = document.getElementById("caseStatus").value;
-          const clientEmail = document.getElementById("caseClientEmail").value;
-          const dueDate = document.getElementById("caseDueDate").value;
+          const assigned_investigator_id = auth.currentUser.uid;
+          const assigned_investigator_email = auth.currentUser.email;
+          const userID = await findId(related_client);
 
-          if (title && description && status && clientEmail && dueDate) {
+          if (title && description) {
             // Add to Firestore
             db.collection("cases")
               .add({
                 title: title,
                 description: description,
+                due_date: due_date,
+                timestamp: new Date(),
                 status: status,
-                clientEmail: clientEmail,
-                dueDate: dueDate,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-                status: status,
-                assigned_investigator: assigned_investigator,
+                assigned_investigator: assigned_investigator_email,
+                assigned_investigator_id: assigned_investigator_id,
                 related_client: related_client,
                 related_user_id: userID,
               })
@@ -350,7 +356,7 @@
                 console.error("Error adding case:", error);
               });
           } else {
-            alert("Please fill out all required fields!");
+            console.error("Please fill out all required fields!");
           }
         });
 
@@ -382,15 +388,16 @@
                     <strong>${caseData.title}</strong>
                     <p class="mb-1">Description: ${caseData.description}</p>
                     <p class="mb-1">Status: ${caseData.status}</p>
-                    <p class="mb-1">Due Date: ${caseData.due_date}</p>
+                    <p class="mb-1">Due Date: ${caseData.due_date
+                      .toDate()
+                      .toLocaleDateString()}</p>
                     <p class="mb-1">Client: ${caseData.related_client}</p>
-                    ${
-                      caseData.timestamp
-                        ? `<small class="text-muted">Added on ${caseData.timestamp
-                            .toDate()
-                            .toLocaleString()}</small>`
-                        : ""
-                    }
+                    <p class="mb-1">Investigator: ${
+                      caseData.assigned_investigator
+                    }</p>
+                    <small class="text-muted">Added on: ${caseData.timestamp
+                      .toDate()
+                      .toLocaleString()}</small>  
                   </div>
                   <button class="btn btn-sm btn-danger delete-case" data-id="${caseId}">
                     <i class="fas fa-trash"></i>
