@@ -311,6 +311,18 @@
     </script>
     <script src="app.js"></script>
     <script>
+      //Auth state
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          setTimeout(() => {
+            loadClients();
+          }, 500);
+        } else {
+          setTimeout(() => {
+            loadClients();
+          }, 500);
+        }
+      });
       // Form submission for adding a new client
       document
         .getElementById("clientForm")

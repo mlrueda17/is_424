@@ -296,6 +296,19 @@
     </script>
     <script src="app.js"></script>
     <script>
+      //Auth state
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          setTimeout(() => {
+            loadCases();
+          }, 500);
+        } else {
+          setTimeout(() => {
+            loadCases();
+          }, 500);
+        }
+      });
+
       // Find ID of client
       async function findId(email) {
         const data = await db
@@ -521,9 +534,6 @@
       }
 
       //Add slight delay to pulling cases
-      setTimeout(() => {
-        loadCases();
-      }, 500);
     </script>
   </body>
 </html>
