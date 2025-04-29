@@ -112,13 +112,11 @@
           </div>
           <div class="mb-3">
             <label for="caseStatus" class="form-label">Case Status</label>
-            <input
-              type="text"
-              class="form-control"
-              id="caseStatus"
-              required
-              placeholder="Active, Pending, or Complete"
-            />
+            <select name="status" id="caseStatus">
+              <option value="Active">Active</option>
+              <option value="Pending">Pending</option>
+              <option value="Complete">Complete</option>
+            </select>
           </div>
           <div class="mb-3">
             <label for="caseClientEmail" class="form-label"
@@ -347,6 +345,7 @@
               })
               .then(() => {
                 // Add the case to the UI
+                alert("Case submitted!");
                 loadCases();
 
                 // Reset the form
