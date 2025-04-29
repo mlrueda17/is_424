@@ -323,3 +323,64 @@ function pendingReports() {
     });
 }
 pendingReports();
+
+// Display cases on main page
+function recentCases() {
+  const caseList = document.getElementById("recentCasesList");
+  caseList.innerHTML = ""; // Clear existing cases
+
+  db.collection("cases")
+    .orderBy("timestamp", "desc")
+    .get()
+    .then((querySnapshot) => {
+      if (querySnapshot.empty) {
+        caseList.innerHTML =
+          '<li class="list-group-item text-muted">No cases found</li>';
+      } else {
+        querySnapshot.forEach((doc) => {
+          const caseData = doc.data();
+          const caseId = doc.id;
+
+          // Create list item with Bootstrap styling
+          const listItem = document.createElement("li");
+          listItem.className = "list-group-item";
+
+          // Create case content with title, description, and delete button
+          listItem.innerHTML = `
+          <div class="d-flex justify-content-between align-items-start">
+            <div>
+              <strong>${caseData.title}</strong>
+              <p class="mb-1">Description: ${caseData.description}</p>
+              <p class="mb-1">Status: ${caseData.status}</p>
+              <p class="mb-1">Due Date: ${caseData.due_date
+                .toDate()
+                .toLocaleDateString()}</p>
+              <p class="mb-1">Client: ${caseData.related_client}</p>
+              <small class="text-muted">Added on: ${caseData.timestamp
+                .toDate()
+                .toLocaleString()}</small>  
+            </div>
+            <button class="btn btn-sm btn-danger delete-case" data-id="${caseId}">
+              <i class="fas fa-trash"></i>
+            </button>
+          </div>
+        `;
+
+          caseList.appendChild(listItem);
+        });
+
+        // Add event listeners to all delete buttons
+        document.querySelectorAll(".delete-case").forEach((button) => {
+          button.addEventListener("click", function () {
+            const caseId = this.getAttribute("data-id");
+            deleteCase(caseId);
+          });
+        });
+      }
+    })
+    .catch((error) => {
+      console.error("Error getting cases:", error);
+      caseList.innerHTML =
+        '<li class="list-group-item text-danger">Error loading cases</li>';
+    });
+}
