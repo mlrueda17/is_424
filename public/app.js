@@ -195,7 +195,7 @@ document
         status: casestatus,
         related_client: clientemail,
         due_date: duedate,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        timestamp: new Date(),
         assigned_investigator: assigned_investigator,
         related_user_id: userID,
       })
@@ -216,7 +216,7 @@ document
       .add({
         full_name: ClientFullName,
         email: ClientEmail,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        timestamp: new Date(),
         role: "client",
         note: "created by investigator",
       })
@@ -240,7 +240,7 @@ document
         related_case_title: reportcasetitle,
         file_path: reportfilepath,
         generated_by: generated_by,
-        timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        timestamp: new Date(),
       })
       .then(() => {
         document.getElementById("newReportForm").reset();
@@ -301,7 +301,7 @@ function pendingReports() {
       mydocs = data.docs;
       mydocs.forEach((d) => {
         due_date = d.data().due_date.toDate();
-        current_date = new Date();
+        current_date = d.data().timestamp;
         console.log(due_date);
         console.log(current_date);
         console.log(due_date - current_date);

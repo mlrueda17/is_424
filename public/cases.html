@@ -337,7 +337,7 @@
                 title: title,
                 description: description,
                 due_date: due_date,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                timestamp: new Date(),
                 status: status,
                 assigned_investigator: assigned_investigator,
                 related_client: related_client,

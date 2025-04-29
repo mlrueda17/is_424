@@ -325,7 +325,7 @@
             .add({
               full_name: full_name,
               email: email,
-              timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+              timestamp: new Date(),
               role: "client",
               note: "created by investigator",
             })
