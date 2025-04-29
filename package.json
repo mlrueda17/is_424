@@ -1,0 +1,12 @@
+{
+  "name": "is_424",
+  "version": "1.0.0",
+  "description": "documentation of pi website files",
+  "main": "index.js",
+  "scripts": {
+    "build": "echo 'No build step needed for static site.'"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
