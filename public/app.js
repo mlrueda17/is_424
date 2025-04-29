@@ -5,11 +5,27 @@ auth.onAuthStateChanged((user) => {
     document.getElementById("loginLink").classList.add("d-none");
     document.getElementById("signupLink").classList.add("d-none");
     document.getElementById("signoutLink").classList.remove("d-none");
+    document.getElementById("activeCases").innerHTML = "";
+    document.getElementById("solvedCases").innerHTML = "";
+    document.getElementById("activeClients").innerHTML = "";
+    document.getElementById("pendingReports").innerHTML = "";
+    activeCases();
+    solvedCases();
+    activeClients();
+    pendingReports();
   } else {
     console.log("No user is logged in");
     document.getElementById("loginLink").classList.remove("d-none");
     document.getElementById("signupLink").classList.remove("d-none");
     document.getElementById("signoutLink").classList.add("d-none");
+    document.getElementById("activeCases").innerHTML = "";
+    document.getElementById("solvedCases").innerHTML = "";
+    document.getElementById("activeClients").innerHTML = "";
+    document.getElementById("pendingReports").innerHTML = "";
+    activeCases();
+    solvedCases();
+    activeClients();
+    pendingReports();
   }
 });
 
