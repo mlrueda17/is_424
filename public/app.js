@@ -43,6 +43,8 @@ document.getElementById("loginSubmitButton").addEventListener("click", (e) => {
     .then((userCredential) => {
       alert("Signed In!");
       var user = userCredential.user;
+      document.getElementById("loginEmail").value = "";
+      document.getElementById("loginPassword").value = "";
     });
 });
 
@@ -59,6 +61,9 @@ document.getElementById("signupSubmitButton").addEventListener("click", (e) => {
     .then((userCredential) => {
       alert("Account Created!");
       var user = userCredential.user;
+      document.getElementById("signupEmail").value = "";
+      document.getElementById("signupPassword").value = "";
+      document.getElementById("signupFullName").value = "";
       db.collection("internal_users").doc(user.uid).set({
         email: signupEmail,
         full_name: full_name,
