@@ -201,7 +201,7 @@ document
     let casedescription = document.getElementById("newCaseDescription").value;
     let casestatus = document.getElementById("newCaseStatus").value;
     let clientemail = document.getElementById("newCaseClientEmail").value;
-    let duedate = document.getElementById("newCaseDueDate").value;
+    let duedate = new Date(document.getElementById("newCaseDueDate").value);
     let assigned_investigator_email = auth.currentUser.email;
     let assigned_investigator_id = auth.currentUser.uid;
     let userID = await findId(clientemail);
@@ -350,22 +350,15 @@ function recentCases() {
           // Create case content with title, description, and delete button
           listItem.innerHTML = `
          <tr>
+                    <td>${caseId}</td>
                     <td>${caseData.title}</td>
-                    <td>John Smith</td>
-                    <td>Background Check</td>
-                    <td><span class="badge bg-success">Active</span></td>
+                    <td>${caseData.related_client}</td>
+                    <td>${caseData.assigned_investigator}</td>
+                    <td><span class="badge bg-success">${caseData.status}</span></td>
          </tr>
         `;
 
           recentCaseList.appendChild(listItem);
-        });
-
-        // Add event listeners to all delete buttons
-        document.querySelectorAll(".delete-case").forEach((button) => {
-          button.addEventListener("click", function () {
-            const caseId = this.getAttribute("data-id");
-            deleteCase(caseId);
-          });
         });
       }
     })
@@ -375,3 +368,5 @@ function recentCases() {
         '<li class="list-group-item text-danger">Error loading cases</li>';
     });
 }
+
+recentCases();
