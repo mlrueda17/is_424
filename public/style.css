@@ -13,15 +13,7 @@
   text-align: center;
   z-index: 1000;
 }
-.notification-modal.show {
-  display: block;
-}
 
-
-/* Modal Content */
-.notification-modal-content {
-  position: relative;
-}
 
 /* Close Button */
 .close {
@@ -32,11 +24,6 @@
   cursor: pointer;
 }
 
-/* Modal Animation */
-.notification-modal.show {
-  display: block;
-  animation: fadeIn 0.3s ease-in-out;
-}
 
 /* Fade In Effect */
 @keyframes fadeIn {
