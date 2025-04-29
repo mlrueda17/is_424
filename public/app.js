@@ -344,21 +344,19 @@ function recentCases() {
           const caseId = doc.id;
 
           // Create list item with Bootstrap styling
-          const listItem = document.createElement("li");
-          listItem.className = "list-group-item";
+          const tableRow = document.createElement("tr");
 
           // Create case content with title, description, and delete button
-          listItem.innerHTML = `
-         <tr>
+          tableRow.innerHTML = `
                     <td>${caseId}</td>
                     <td>${caseData.title}</td>
                     <td>${caseData.related_client}</td>
                     <td>${caseData.assigned_investigator}</td>
-                    <td><span class="badge bg-success">${caseData.status}</span></td>
-         </tr>
+                    <td>${caseData.status}</td>
+                    <td>${caseData.due_date.toDate().toLocaleDateString()}</td>
         `;
 
-          recentCaseList.appendChild(listItem);
+          recentCaseList.appendChild(tableRow);
         });
       }
     })
