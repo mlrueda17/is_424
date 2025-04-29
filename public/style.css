@@ -13,6 +13,10 @@
   text-align: center;
   z-index: 1000;
 }
+.notification-modal.show {
+  display: block;
+}
+
 
 /* Modal Content */
 .notification-modal-content {
