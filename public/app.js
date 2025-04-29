@@ -294,19 +294,16 @@ function activeClients() {
 activeClients();
 
 function pendingReports() {
+  let week_from_now = new Date(Date.now() + 604800000);
+  console.log(week_from_now);
   db.collection("cases")
-    .where("due_date", ">", 0)
+    .where("due_date", "<", week_from_now)
     .get()
     .then((data) => {
       mydocs = data.docs;
-      mydocs.forEach((d) => {
-        due_date = d.data().due_date;
-        current_date = d.data().timestamp;
-        console.log(due_date);
-        console.log(current_date);
-        console.log(due_date - current_date);
-        // Week in seconds: 604,800
-      });
+      due_soon = mydocs.length;
+      document.getElementById("pendingReports").innerHTML = "";
+      document.getElementById("pendingReports").innerHTML = due_soon;
     });
 }
 pendingReports();
