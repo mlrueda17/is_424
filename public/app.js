@@ -122,63 +122,44 @@ document.addEventListener("DOMContentLoaded", function () {
   const signupLink = document.getElementById("signupLink");
   const signupModal = document.getElementById("signupModal");
 
-  if (signupLink && signupModal) {
-    signupLink.addEventListener("click", function (event) {
-      event.preventDefault();
-      const modal = bootstrap.Modal.getOrCreateInstance(signupModal);
-      modal.show();
-    });
-  } else {
-    console.error("signupLink or signupModal not found!");
-  }
+  signupLink.addEventListener("click", function (event) {
+    event.preventDefault();
+    const modal = bootstrap.Modal.getOrCreateInstance(signupModal);
+    modal.show();
+  });
 });
 
 // New Case modal
 document.addEventListener("DOMContentLoaded", function () {
   const newCaseButton = document.getElementById("newCaseButton");
   const newCaseModal = document.getElementById("newCaseModal");
-
-  if (newCaseButton && newCaseModal) {
-    newCaseButton.addEventListener("click", function (event) {
-      event.preventDefault();
-      const modal = bootstrap.Modal.getOrCreateInstance(newCaseModal);
-      modal.show();
-    });
-  } else {
-    console.error("signupLink or signupModal not found!");
-  }
+  newCaseButton.addEventListener("click", function (event) {
+    event.preventDefault();
+    const modal = bootstrap.Modal.getOrCreateInstance(newCaseModal);
+    modal.show();
+  });
 });
 
 // New Client modal
 document.addEventListener("DOMContentLoaded", function () {
   const newClientButton = document.getElementById("newClientButton");
   const newClientModal = document.getElementById("newClientModal");
-
-  if (newClientButton && newClientModal) {
-    newClientButton.addEventListener("click", function (event) {
-      event.preventDefault();
-      const modal = bootstrap.Modal.getOrCreateInstance(newClientModal);
-      modal.show();
-    });
-  } else {
-    console.error("signupLink or signupModal not found!");
-  }
+  newClientButton.addEventListener("click", function (event) {
+    event.preventDefault();
+    const modal = bootstrap.Modal.getOrCreateInstance(newClientModal);
+    modal.show();
+  });
 });
 
 // New Report modal
 document.addEventListener("DOMContentLoaded", function () {
   const newReportButton = document.getElementById("newReportButton");
   const newReportModal = document.getElementById("newReportModal");
-
-  if (newReportButton && newReportModal) {
-    newReportButton.addEventListener("click", function (event) {
-      event.preventDefault();
-      const modal = bootstrap.Modal.getOrCreateInstance(newReportModal);
-      modal.show();
-    });
-  } else {
-    console.error("signupLink or signupModal not found!");
-  }
+  newReportButton.addEventListener("click", function (event) {
+    event.preventDefault();
+    const modal = bootstrap.Modal.getOrCreateInstance(newReportModal);
+    modal.show();
+  });
 });
 
 // Find ID of client
