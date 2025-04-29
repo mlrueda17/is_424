@@ -428,13 +428,19 @@
                     <p class="mb-1">Investigator: ${
                       caseData.assigned_investigator
                     }</p>
+                   
                     <small class="text-muted">Added on: ${caseData.timestamp
                       .toDate()
                       .toLocaleString()}</small>  
                   </div>
-                  <button class="btn btn-sm btn-danger delete-case" data-id="${caseId}">
+                  <div>
+                  <button class="btn btn-sm btn-success mark-case-complete" mark-complete-id="${caseId}">
+                    Mark as complete
+                  </button>
+                  <button class="btn btn-sm btn-danger delete-case" delete-data-id="${caseId}">
                     <i class="fas fa-trash"></i>
                   </button>
+                  </div>
                 </div>
               `;
 
