@@ -9,10 +9,12 @@ auth.onAuthStateChanged((user) => {
     document.getElementById("solvedCases").innerHTML = "";
     document.getElementById("activeClients").innerHTML = "";
     document.getElementById("pendingReports").innerHTML = "";
+    document.getElementById("recentCasesList").innerHTML = "";
     activeCases();
     solvedCases();
     activeClients();
     pendingReports();
+    recentCases();
   } else {
     console.log("No user is logged in");
     document.getElementById("loginLink").classList.remove("d-none");
@@ -22,10 +24,12 @@ auth.onAuthStateChanged((user) => {
     document.getElementById("solvedCases").innerHTML = "";
     document.getElementById("activeClients").innerHTML = "";
     document.getElementById("pendingReports").innerHTML = "";
+    document.getElementById("recentCasesList").innerHTML = "";
     activeCases();
     solvedCases();
     activeClients();
     pendingReports();
+    recentCases();
   }
 });
 
@@ -333,6 +337,7 @@ function recentCases() {
 
   db.collection("cases")
     .orderBy("timestamp", "desc")
+    .limit(3)
     .get()
     .then((querySnapshot) => {
       if (querySnapshot.empty) {
