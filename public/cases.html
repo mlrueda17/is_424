@@ -454,6 +454,16 @@
                     deleteCase(caseId);
                   });
                 });
+
+                // Add event listeners to all update buttons
+                document
+                  .querySelectorAll(".mark-case-complete")
+                  .forEach((button) => {
+                    button.addEventListener("click", function () {
+                      const caseId = this.getAttribute("mark-complete-id");
+                      deleteCase(caseId);
+                    });
+                  });
               }
             })
             .catch((error) => {
@@ -538,8 +548,6 @@
             });
         }
       }
-
-      //Add slight delay to pulling cases
     </script>
   </body>
 </html>
