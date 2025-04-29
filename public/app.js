@@ -313,7 +313,7 @@ activeClients();
 
 function pendingReports() {
   let week_from_now = new Date(Date.now() + 604800000);
-  console.log(week_from_now);
+
   db.collection("cases")
     .where("due_date", "<", week_from_now)
     .get()
