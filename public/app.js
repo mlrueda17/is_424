@@ -202,7 +202,8 @@ document
     let casestatus = document.getElementById("newCaseStatus").value;
     let clientemail = document.getElementById("newCaseClientEmail").value;
     let duedate = document.getElementById("newCaseDueDate").value;
-    let assigned_investigator = auth.currentUser.uid;
+    let assigned_investigator_email = auth.currentUser.email;
+    let assigned_investigator_id = auth.currentUser.uid;
     let userID = await findId(clientemail);
     db.collection("cases")
       .add({
@@ -212,7 +213,8 @@ document
         related_client: clientemail,
         due_date: duedate,
         timestamp: new Date(),
-        assigned_investigator: assigned_investigator,
+        assigned_investigator: assigned_investigator_email,
+        assigned_investigator_id: assigned_investigator_id,
         related_user_id: userID,
       })
       .then(() => {
