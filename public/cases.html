@@ -450,7 +450,7 @@
                 // Add event listeners to all delete buttons
                 document.querySelectorAll(".delete-case").forEach((button) => {
                   button.addEventListener("click", function () {
-                    const caseId = this.getAttribute("data-id");
+                    const caseId = this.getAttribute("delete-data-id");
                     deleteCase(caseId);
                   });
                 });
@@ -461,7 +461,7 @@
                   .forEach((button) => {
                     button.addEventListener("click", function () {
                       const caseId = this.getAttribute("mark-complete-id");
-                      deleteCase(caseId);
+                      markComplete(caseId);
                     });
                   });
               }
@@ -507,21 +507,9 @@
                       .toDate()
                       .toLocaleString()}</small>  
                   </div>
-                  <button class="btn btn-sm btn-danger delete-case" data-id="${caseId}">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                </div>
-              `;
+                </div>`;
 
                   caseList.appendChild(listItem);
-                });
-
-                // Add event listeners to all delete buttons
-                document.querySelectorAll(".delete-case").forEach((button) => {
-                  button.addEventListener("click", function () {
-                    const caseId = this.getAttribute("data-id");
-                    deleteCase(caseId);
-                  });
                 });
               }
             })
@@ -541,7 +529,7 @@
             .delete()
             .then(() => {
               alert("Case successfully deleted!");
-              loadCases(); // Refresh the list
+              loadCases();
             })
             .catch((error) => {
               console.error("Error removing case: ", error);
@@ -552,6 +540,15 @@
       // Function to mark a case as complete
       function markComplete(caseId) {
         if (confirm("Are you sure you want to mark this case as complete?")) {
+          db.collection("cases")
+            .doc(caseId)
+            .update({
+              status: "Complete",
+            })
+            .then(() => {
+              alert("Cases successfully marked complete!");
+              loadCases();
+            });
         }
       }
     </script>
