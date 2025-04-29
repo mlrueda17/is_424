@@ -362,6 +362,7 @@
 
       // Function to display cases
       function loadCases() {
+        console.log(auth.currentUser.uid);
         const caseList = document.getElementById("caseList");
         caseList.innerHTML = ""; // Clear existing cases
 
@@ -440,7 +441,10 @@
         }
       }
 
-      loadCases();
+      //Add slight delay to pulling cases
+      setTimeout(() => {
+        loadCases();
+      }, 500);
     </script>
   </body>
 </html>
