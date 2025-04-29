@@ -371,5 +371,3 @@ function recentCases() {
         '<li class="list-group-item text-danger">Error loading cases</li>';
     });
 }
-
-recentCases();
