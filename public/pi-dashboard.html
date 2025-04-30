@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <script>"puppet.js"</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>PI Dashboard</title>
@@ -83,7 +84,7 @@
       </div>
     </nav>
     <!-- Notification Modal -->
-    <div id="notificationModal" class="notification-modal">
+ <div id="notificationModal" class="notification-modal">
       <div class="modal-content">
         <span class="close">&times;</span>
         <p>You have new notifications!</p>
@@ -93,7 +94,7 @@
           <li>🔔 Notification 3</li>
         </ul>
       </div>
-    </div>
+</div>
 
     <div class="container-fluid py-4">
       <div class="row g-4">
@@ -102,7 +103,7 @@
           <div class="card bg-primary text-white">
             <div class="card-body">
               <h5 class="card-title">Active Cases</h5>
-              <h2 id="activeCases"></h2>
+              <h2 id="activeCases">6</h2>
               <p class="mb-0">
                 <i class="fas fa-arrow-up me-1"></i>3 new this week
               </p>
@@ -113,7 +114,7 @@
           <div class="card bg-success text-white">
             <div class="card-body">
               <h5 class="card-title">Solved Cases</h5>
-              <h2 id="solvedCases"></h2>
+              <h2 id="solvedCases">25</h2>
               <p class="mb-0"><i class="fas fa-check me-1"></i>4 this month</p>
             </div>
           </div>
@@ -122,7 +123,7 @@
           <div class="card bg-warning text-white">
             <div class="card-body">
               <h5 class="card-title">Pending Reports</h5>
-              <h2 id="pendingReports"></h2>
+              <h2 id="pendingReports">3</h2>
               <p class="mb-0"><i class="fas fa-clock me-1"></i>Due this week</p>
             </div>
           </div>
@@ -131,7 +132,7 @@
           <div class="card bg-info text-white">
             <div class="card-body">
               <h5 class="card-title">Active Clients</h5>
-              <h2 id="activeClients"></h2>
+              <h2 id="activeClients">8</h2>
               <p class="mb-0">
                 <i class="fas fa-users me-1"></i>2 new this month
               </p>
@@ -140,76 +141,72 @@
         </div>
 
         <!-- Calendar View -->
-        <!-- Flex Container to hold both calendar and recent cases -->
-        <div
-          style="
-            display: flex;
-            gap: 80px;
-            align-items: flex-start;
-            margin-top: 20px;
-          "
-        >
-          <!-- Calendar View -->
-          <div style="flex: 0 0 250px">
-            <iframe
-              src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FChicago&showPrint=0&src=ZjI3YTViODNjNTVkN2EzOTE5ZGE4MDI4MGVkNGY0ODE2MWRkZjIxNGFlZGUwZmQ1MDUwZDAwOGJkY2M2ZDU3NUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23616161&color=%230B8043"
-              style="border: solid 1px #777; width: 150%; height: 250px"
-              frameborder="0"
-              scrolling="no"
-            >
-            </iframe>
-          </div>
-          <div id="test"></div>
-          <!-- Recent Cases Table -->
-          <div class="col-md-8">
-            <div class="card">
-              <div class="card-header bg-white">
-                <div class="d-flex justify-content-between align-items-center">
-                  <h5 class="card-title mb-0">Recent Cases</h5>
-                  <!-- <div class="btn-group">
-                    <button class="btn btn-outline-secondary btn-sm">
-                      Filter
-                    </button>
-                    <button class="btn btn-outline-secondary btn-sm">
-                      Export
-                    </button>
-                    <button class="btn btn-primary btn-sm">New Case</button>
-                  </div> -->
-                </div>
-              </div>
-              <div class="card-body">
-                <table class="table table-hover">
-                  <thead>
-                    <tr>
-                      <th>Case ID</th>
-                      <th>Title</th>
-                      <th>Client</th>
-                      <th>Investigator</th>
-                      <th>Status</th>
-                      <th>Due Date</th>
-                    </tr>
-                  </thead>
-                  <tbody id="recentCasesList">
-                    <tr>
-                      <td>#PI-2025-001</td>
-                      <td>John Smith</td>
-                      <td>Background Check</td>
-                      <td><span class="badge bg-success">Active</span></td>
-                      <td>May 5, 2025</td>
-                    </tr>
-                    <tr>
-                      <td>#PI-2025-002</td>
-                      <td>Sarah Johnson</td>
-                      <td>Surveillance</td>
-                      <td><span class="badge bg-warning">Pending</span></td>
-                      <td>May 12, 2025</td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
+<!-- Flex Container to hold both calendar and recent cases -->
+<div style="display: flex; gap: 80px; align-items: flex-start; margin-top: 20px;">
+
+  <!-- Calendar View -->
+  <div style="flex: 0 0 250px;">
+    <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FChicago&showPrint=0&src=ZjI3YTViODNjNTVkN2EzOTE5ZGE4MDI4MGVkNGY0ODE2MWRkZjIxNGFlZGUwZmQ1MDUwZDAwOGJkY2M2ZDU3NUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23616161&color=%230B8043" 
+      style="border:solid 1px #777; width: 150%; height: 250px;" frameborder="0" scrolling="no">
+    </iframe>
+  </div>
+<div id="test"></div>
+  <!-- Recent Cases Table -->
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header bg-white">
+        <div class="d-flex justify-content-between align-items-center">
+          <h5 class="card-title mb-0">Recent Cases</h5>
+          <div class="btn-group">
+            <button class="btn btn-outline-secondary btn-sm">Filter</button>
+            <button class="btn btn-outline-secondary btn-sm">Export</button>
+            <button class="btn btn-primary btn-sm">New Case</button>
           </div>
         </div>
+      </div>
+      <div class="card-body">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Case ID</th>
+              <th>Title</th>
+              <th>Client</th>
+              <th>Investigator</th>
+              <th>Status</th>
+              <th>Due Date</th>
+            </tr>
+          </thead>
+          <tbody id="recentCasesList">
+            <tr>
+              <td>#PI-2025-001</td>
+              <td>John Smith</td>
+              <td>Background Check</td>
+              <td><span class="badge bg-success">Active</span></td>
+              <td>May 5, 2025</td>
+            </tr>
+            <tr>
+              <td>#PI-2025-002</td>
+              <td>Sarah Johnson</td>
+              <td>Surveillance</td>
+              <td><span class="badge bg-warning">Pending</span></td>
+              <td>May 12, 2025</td>
+            </tr>
+          </tbody>
+        </table>
+        <nav>
+          <ul class="pagination justify-content-end mb-0">
+            <li class="page-item disabled"><a class="page-link" href="#">Previous</a></li>
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+</div>
 
         <!-- Case Analytics -->
         <div class="col-md-6">
@@ -547,7 +544,7 @@
               </div>
               <div></div>
               <div class="mb-3">
-                <label class="form-label">Associated Clent Email</label>
+                <label class="form-label">Associated Client Email</label>
                 <input
                   type="email"
                   class="form-control"
