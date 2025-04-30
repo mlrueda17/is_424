@@ -282,6 +282,7 @@ function activeClients() {
     });
 }
 
+// Find reports due within a week
 function pendingReports() {
   let week_from_now = new Date(Date.now() + 604800000);
 
@@ -298,6 +299,7 @@ function pendingReports() {
     });
 }
 
+// Notify of new cases
 function newCases() {
   let three_days_ago = new Date(Date.now() - 259200000);
 
@@ -310,6 +312,8 @@ function newCases() {
       let recent_cases = mydocs.length;
       document.getElementById("totalNotifications").innerHTML = "";
       document.getElementById("totalNotifications").innerHTML = recent_cases;
+      document.getElementById("notificationReminder").innerHTML = "";
+      document.getElementById("notificationReminder").innerHTML = recent_cases;
       document.getElementById("notificationBody").innerHTML = "";
       mydocs.forEach((d) => {
         let case_title = d.data().title;
