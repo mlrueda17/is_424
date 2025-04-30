@@ -41,7 +41,7 @@ document.getElementById("loginSubmitButton").addEventListener("click", (e) => {
   auth
     .signInWithEmailAndPassword(loginEmail, loginPassword)
     .then((userCredential) => {
-      alert("Signed In!");
+      // alert("Signed In!");
       var user = userCredential.user;
       document.getElementById("loginEmail").value = "";
       document.getElementById("loginPassword").value = "";
