@@ -83,26 +83,12 @@ document.getElementById("signoutLink").addEventListener("click", () => {
 
 // code for notification modal
 document.addEventListener("DOMContentLoaded", function () {
-  const modal = document.getElementById("notificationModal");
+  const modalElement = document.getElementById("notificationModal");
   const bellIcon = document.getElementById("notificationBell");
-  const closeModal = document.querySelector(".close");
-
-  // Show modal when clicking the bell icon
   bellIcon.addEventListener("click", function (event) {
-    event.preventDefault(); // Prevent default anchor behavior
-    modal.classList.add("show");
-  });
-
-  // Close modal when clicking the close button
-  closeModal.addEventListener("click", function () {
-    modal.classList.remove("show");
-  });
-
-  // Close modal when clicking outside of it
-  window.addEventListener("click", function (event) {
-    if (event.target === modal) {
-      modal.classList.remove("show");
-    }
+    event.preventDefault();
+    const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
+    modal.show();
   });
 });
 
@@ -110,16 +96,11 @@ document.addEventListener("DOMContentLoaded", function () {
 document.addEventListener("DOMContentLoaded", function () {
   const loginLink = document.getElementById("loginLink");
   const modalElement = document.getElementById("loginModal");
-
-  if (loginLink && modalElement) {
-    loginLink.addEventListener("click", function (event) {
-      event.preventDefault();
-      const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
-      modal.show();
-    });
-  } else {
-    console.error("loginLink or loginModal not found!");
-  }
+  loginLink.addEventListener("click", function (event) {
+    event.preventDefault();
+    const modal = bootstrap.Modal.getOrCreateInstance(modalElement);
+    modal.show();
+  });
 });
 
 // signup modal
