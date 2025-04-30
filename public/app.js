@@ -246,7 +246,7 @@ function activeCases() {
     .get()
     .then((data) => {
       mydocs = data.docs;
-      active_cases = mydocs.length;
+      let active_cases = mydocs.length;
       document.getElementById("activeCases").innerHTML = "";
       document.getElementById("activeCases").innerHTML = active_cases;
       document.getElementById("caseProgressReminder").innerHTML = "";
@@ -261,7 +261,7 @@ function solvedCases() {
     .get()
     .then((data) => {
       mydocs = data.docs;
-      solved_cases = mydocs.length;
+      let solved_cases = mydocs.length;
       document.getElementById("solvedCases").innerHTML = "";
       document.getElementById("solvedCases").innerHTML = solved_cases;
       document.getElementById("clientMeetingReminder").innerHTML = "";
@@ -276,7 +276,7 @@ function activeClients() {
     .get()
     .then((data) => {
       mydocs = data.docs;
-      active_clients = mydocs.length;
+      let active_clients = mydocs.length;
       document.getElementById("activeClients").innerHTML = "";
       document.getElementById("activeClients").innerHTML = active_clients;
     });
@@ -290,13 +290,37 @@ function pendingReports() {
     .get()
     .then((data) => {
       mydocs = data.docs;
-      due_soon = mydocs.length;
+      let due_soon = mydocs.length;
       document.getElementById("pendingReports").innerHTML = "";
       document.getElementById("pendingReports").innerHTML = due_soon;
       document.getElementById("pendingReportReminder").innerHTML = "";
       document.getElementById("pendingReportReminder").innerHTML = due_soon;
     });
 }
+
+function newCases() {
+  let three_days_ago = new Date(Date.now() - 259200000);
+
+  db.collection("cases")
+    .orderBy("timestamp", "desc")
+    .where("timestamp", ">", three_days_ago)
+    .get()
+    .then((data) => {
+      mydocs = data.docs;
+      let recent_cases = mydocs.length;
+      document.getElementById("totalNotifications").innerHTML = "";
+      document.getElementById("totalNotifications").innerHTML = recent_cases;
+      document.getElementById("notificationBody").innerHTML = "";
+      mydocs.forEach((d) => {
+        let case_title = d.data().title;
+        document.getElementById(
+          "notificationBody"
+        ).innerHTML += `<li class="mb-3"><i style="color:gold" class="fa-solid fa-bell"></i> Recently Added Case: ${case_title}</li>`;
+      });
+    });
+}
+
+newCases();
 
 // Display cases on main page
 function recentCases() {
