@@ -4,6 +4,7 @@ auth.onAuthStateChanged((user) => {
     console.log("User is logged in");
     document.getElementById("loginLink").classList.add("d-none");
     document.getElementById("signupLink").classList.add("d-none");
+    document.getElementById("noAuthView").classList.add("d-none");
     document.getElementById("signoutLink").classList.remove("d-none");
     document.getElementById("notificationBell").classList.remove("d-none");
     document.getElementById("mainPageContent").classList.remove("d-none");
@@ -22,6 +23,7 @@ auth.onAuthStateChanged((user) => {
     console.log("No user is logged in");
     document.getElementById("loginLink").classList.remove("d-none");
     document.getElementById("signupLink").classList.remove("d-none");
+    document.getElementById("noAuthView").classList.remove("d-none");
     document.getElementById("signoutLink").classList.add("d-none");
     document.getElementById("notificationBell").classList.add("d-none");
     document.getElementById("mainPageContent").classList.add("d-none");
