@@ -30,8 +30,20 @@ async function go() {
   // force a delay
   await new Promise((r) => setTimeout(r, 1000));
 
+  //Click on new case
+  await page.click("#newCaseButton");
+
+  // Enter case info
+  await page.type("#newCaseTitle", "Puppeteer Test Case");
+  await page.type("#newCaseDescription", "Puppeteer Test Case");
+  await page.type("#newCaseClientEmail", "client@test.com");
+  await page.type("#newCaseDueDate", "05062025");
+  await page.click("#newCaseSubmitButton");
+
+  // force a delay
+  await new Promise((r) => setTimeout(r, 1000));
   // close the browser
-  // browser.close();
+  browser.close();
 }
 
 go();
