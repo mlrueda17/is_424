@@ -53,13 +53,35 @@
           <!-- Search Bar -->
           <form class="d-flex mx-auto">
             <div class="input-group">
+              <select
+                class="btn btn-secondary dropdown-toggle bg-primary"
+                name="filter"
+                id="clientsFilter"
+              >
+                <option value="">Filter Value</option>
+                <option value="full_name">Client Name</option>
+                <option value="email">Client Email</option>
+              </select>
               <input
                 class="form-control"
                 type="search"
-                placeholder="Search cases, clients, or reports..."
+                placeholder="Search clients"
                 style="width: 300px"
+                id="clientsFilterSearchTerm"
               />
-              <button class="btn btn-outline-light" type="submit">
+              <button
+                id="clientFilterReset"
+                class="btn bg-white d-none"
+                style="color: red"
+                type="button"
+              >
+                Reset Filter
+              </button>
+              <button
+                id="clientsSearchSubmit"
+                class="btn btn-outline-light"
+                type="button"
+              >
                 <i class="fas fa-search"></i>
               </button>
             </div>
@@ -373,7 +395,7 @@
                 <div class="d-flex justify-content-between align-items-start">
                   <div>
                     <strong>${clientData.full_name}</strong>
-                    <p class="mb-1">Description: ${clientData.email}</p>
+                    <p class="mb-1">Client Email: ${clientData.email}</p>
                     <small class="text-muted">Added on: ${clientData.timestamp
                       .toDate()
                       .toLocaleString()}</small>
@@ -392,6 +414,67 @@
           });
       }
       loadClients();
+
+      // Search Function
+      document
+        .getElementById("clientsSearchSubmit")
+        .addEventListener("click", (e) => {
+          e.preventDefault();
+          let filterValue = document.getElementById("clientsFilter").value;
+          let filterSearchTerm = document.getElementById(
+            "clientsFilterSearchTerm"
+          ).value;
+          db.collection("internal_users")
+            .where(filterValue, "==", filterSearchTerm)
+            .get()
+            .then((querySnapshot) => {
+              clientList.innerHTML = "";
+              document
+                .getElementById("clientFilterReset")
+                .classList.remove("d-none");
+              if (querySnapshot.empty) {
+                clientList.innerHTML =
+                  '<li class="list-group-item text-muted">No clients found</li>';
+              } else {
+                querySnapshot.forEach((doc) => {
+                  const clientData = doc.data();
+
+                  // Create list item with Bootstrap styling
+                  const listItem = document.createElement("li");
+                  listItem.className = "list-group-item";
+
+                  // Create client content with name and email
+                  listItem.innerHTML = `
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <strong>${clientData.full_name}</strong>
+                    <p class="mb-1">Client Email: ${clientData.email}</p>
+                    <small class="text-muted">Added on: ${clientData.timestamp
+                      .toDate()
+                      .toLocaleString()}</small>
+                  </div>
+                </div>
+              `;
+
+                  clientList.appendChild(listItem);
+                });
+              }
+            })
+            .catch((error) => {
+              console.error("Error getting clients:", error);
+              clientList.innerHTML =
+                '<li class="list-group-item text-danger">Error loading clients</li>';
+            });
+        });
+      // Reset Filter
+      document
+        .getElementById("clientFilterReset")
+        .addEventListener("click", (e) => {
+          e.preventDefault();
+          loadClients();
+          document.getElementById("clientFilterReset").classList.add("d-none");
+          document.getElementById("clientsFilterSearchTerm").value = "";
+        });
     </script>
   </body>
 </html>
