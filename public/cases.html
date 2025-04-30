@@ -73,7 +73,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" id="loginLink"
-                ><i class="fas fa-user me-1"></i>Profile</a
+                ><i class="fas fa-user me-1"></i>Log In</a
               >
             </li>
             <li class="nav-item">
@@ -112,13 +112,11 @@
           </div>
           <div class="mb-3">
             <label for="caseStatus" class="form-label">Case Status</label>
-            <input
-              type="text"
-              class="form-control"
-              id="caseStatus"
-              required
-              placeholder="Active, Pending, or Complete"
-            />
+            <select name="status" id="caseStatus">
+              <option value="Active">Active</option>
+              <option value="Pending">Pending</option>
+              <option value="Complete">Complete</option>
+            </select>
           </div>
           <div class="mb-3">
             <label for="caseClientEmail" class="form-label"
@@ -298,6 +296,19 @@
     </script>
     <script src="app.js"></script>
     <script>
+      //Auth state
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          setTimeout(() => {
+            loadCases();
+          }, 500);
+        } else {
+          setTimeout(() => {
+            loadCases();
+          }, 500);
+        }
+      });
+
       // Find ID of client
       async function findId(email) {
         const data = await db
@@ -347,6 +358,7 @@
               })
               .then(() => {
                 // Add the case to the UI
+                alert("Case submitted!");
                 loadCases();
 
                 // Reset the form
@@ -360,29 +372,125 @@
           }
         });
 
+      // Find role of user
+      async function findRole(uid) {
+        const data = await db
+          .collection("internal_users")
+          .where("user_id", "==", uid)
+          .get()
+          .catch(() => {
+            return null;
+          });
+        if (data == null) {
+          return null;
+        }
+        const mydocs = data.docs;
+        if (mydocs.length > 0) {
+          return mydocs[0].data().role;
+        } else {
+          return null;
+        }
+      }
+
       // Function to display cases
-      function loadCases() {
+      async function loadCases() {
         const caseList = document.getElementById("caseList");
         caseList.innerHTML = ""; // Clear existing cases
+        current_role = await findRole(auth.currentUser.uid);
+        if (current_role == "investigator") {
+          db.collection("cases")
+            .orderBy("timestamp", "desc")
+            .get()
+            .then((querySnapshot) => {
+              if (querySnapshot.empty) {
+                caseList.innerHTML =
+                  '<li class="list-group-item text-muted">No cases found</li>';
+              } else {
+                querySnapshot.forEach((doc) => {
+                  const caseData = doc.data();
+                  const caseId = doc.id;
 
-        db.collection("cases")
-          .orderBy("timestamp", "desc")
-          .get()
-          .then((querySnapshot) => {
-            if (querySnapshot.empty) {
+                  // Create list item with Bootstrap styling
+                  const listItem = document.createElement("li");
+                  listItem.className = "list-group-item";
+
+                  // Create case content with title, description, and delete button
+                  listItem.innerHTML = `
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <strong>${caseData.title}</strong>
+                    <p class="mb-1">Description: ${caseData.description}</p>
+                    <p class="mb-1">Status: ${caseData.status}</p>
+                    <p class="mb-1">Due Date: ${caseData.due_date
+                      .toDate()
+                      .toLocaleDateString()}</p>
+                    <p class="mb-1">Client: ${caseData.related_client}</p>
+                    <p class="mb-1">Investigator: ${
+                      caseData.assigned_investigator
+                    }</p>
+                   
+                    <small class="text-muted">Added on: ${caseData.timestamp
+                      .toDate()
+                      .toLocaleString()}</small>  
+                  </div>
+                  <div>
+                  <button class="btn btn-sm btn-success mark-case-complete" mark-complete-id="${caseId}">
+                    Mark as complete
+                  </button>
+                  <button class="btn btn-sm btn-danger delete-case" delete-data-id="${caseId}">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                  </div>
+                </div>
+              `;
+
+                  caseList.appendChild(listItem);
+                });
+
+                // Add event listeners to all delete buttons
+                document.querySelectorAll(".delete-case").forEach((button) => {
+                  button.addEventListener("click", function () {
+                    const caseId = this.getAttribute("delete-data-id");
+                    deleteCase(caseId);
+                  });
+                });
+
+                // Add event listeners to all update buttons
+                document
+                  .querySelectorAll(".mark-case-complete")
+                  .forEach((button) => {
+                    button.addEventListener("click", function () {
+                      const caseId = this.getAttribute("mark-complete-id");
+                      markComplete(caseId);
+                    });
+                  });
+              }
+            })
+            .catch((error) => {
+              console.error("Error getting cases:", error);
               caseList.innerHTML =
-                '<li class="list-group-item text-muted">No cases found</li>';
-            } else {
-              querySnapshot.forEach((doc) => {
-                const caseData = doc.data();
-                const caseId = doc.id;
+                '<li class="list-group-item text-danger">Error loading cases</li>';
+            });
+        } else {
+          db.collection("cases")
+            .orderBy("timestamp", "desc")
+            .where("related_user_id", "==", auth.currentUser.uid)
+            .get()
+            .then((querySnapshot) => {
+              if (querySnapshot.empty) {
+                caseList.innerHTML =
+                  '<li class="list-group-item text-muted">No cases found</li>';
+              } else {
+                querySnapshot.forEach((doc) => {
+                  const caseData = doc.data();
+                  const caseId = doc.id;
 
-                // Create list item with Bootstrap styling
-                const listItem = document.createElement("li");
-                listItem.className = "list-group-item";
+                  // Create list item with Bootstrap styling
+                  const listItem = document.createElement("li");
+                  listItem.className = "list-group-item";
 
-                // Create case content with title, description, and delete button
-                listItem.innerHTML = `
+                  // Create case content with title, description, and delete button
+                  listItem.innerHTML = `
                 <div class="d-flex justify-content-between align-items-start">
                   <div>
                     <strong>${caseData.title}</strong>
@@ -399,29 +507,18 @@
                       .toDate()
                       .toLocaleString()}</small>  
                   </div>
-                  <button class="btn btn-sm btn-danger delete-case" data-id="${caseId}">
-                    <i class="fas fa-trash"></i>
-                  </button>
-                </div>
-              `;
+                </div>`;
 
-                caseList.appendChild(listItem);
-              });
-
-              // Add event listeners to all delete buttons
-              document.querySelectorAll(".delete-case").forEach((button) => {
-                button.addEventListener("click", function () {
-                  const caseId = this.getAttribute("data-id");
-                  deleteCase(caseId);
+                  caseList.appendChild(listItem);
                 });
-              });
-            }
-          })
-          .catch((error) => {
-            console.error("Error getting cases:", error);
-            caseList.innerHTML =
-              '<li class="list-group-item text-danger">Error loading cases</li>';
-          });
+              }
+            })
+            .catch((error) => {
+              console.error("Error getting cases:", error);
+              caseList.innerHTML =
+                '<li class="list-group-item text-danger">Error loading cases</li>';
+            });
+        }
       }
 
       // Function to delete a case
@@ -431,8 +528,8 @@
             .doc(caseId)
             .delete()
             .then(() => {
-              console.log("Case successfully deleted!");
-              loadCases(); // Refresh the list
+              alert("Case successfully deleted!");
+              loadCases();
             })
             .catch((error) => {
               console.error("Error removing case: ", error);
@@ -440,7 +537,20 @@
         }
       }
 
-      loadCases();
+      // Function to mark a case as complete
+      function markComplete(caseId) {
+        if (confirm("Are you sure you want to mark this case as complete?")) {
+          db.collection("cases")
+            .doc(caseId)
+            .update({
+              status: "Complete",
+            })
+            .then(() => {
+              alert("Cases successfully marked complete!");
+              loadCases();
+            });
+        }
+      }
     </script>
   </body>
 </html>

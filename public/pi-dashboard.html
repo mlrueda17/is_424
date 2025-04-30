@@ -54,17 +54,7 @@
           </ul>
           <!-- Search Bar -->
           <form class="d-flex mx-auto">
-            <div class="input-group">
-              <input
-                class="form-control"
-                type="search"
-                placeholder="Search cases, clients, or reports..."
-                style="width: 300px"
-              />
-              <button class="btn btn-outline-light" type="submit">
-                <i class="fas fa-search"></i>
-              </button>
-            </div>
+            <div class="input-group"></div>
           </form>
           <ul class="navbar-nav ms-auto">
             <li class="nav-item">
@@ -112,7 +102,7 @@
           <div class="card bg-primary text-white">
             <div class="card-body">
               <h5 class="card-title">Active Cases</h5>
-              <h2 id="activeCases">0</h2>
+              <h2 id="activeCases"></h2>
               <p class="mb-0">
                 <i class="fas fa-arrow-up me-1"></i>3 new this week
               </p>
@@ -149,6 +139,7 @@
           </div>
         </div>
 
+        <!-- Calendar View -->
 <!-- Flex Container to hold both calendar and recent cases -->
 <div style="display: flex; gap: 80px; align-items: flex-start; margin-top: 20px;">
 
@@ -341,30 +332,35 @@
               </div>
               <div class="list-group">
                 <div class="list-group">
-                  <a
-                    href="#"
+                  <div
                     class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
                   >
                     <i class="fas fa-exclamation-circle text-warning me-2"></i>
                     Follow up on pending reports
-                    <span class="badge bg-warning">3</span>
-                  </a>
-                  <a
-                    href="#"
+                    <span
+                      id="pendingReportReminder"
+                      class="badge bg-warning"
+                    ></span>
+                  </div>
+                  <div
                     class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
                   >
                     <i class="fas fa-calendar-check text-primary me-2"></i>
                     Schedule client meetings
-                    <span class="badge bg-primary">2</span>
-                  </a>
-                  <a
-                    href="#"
+                    <span id="clientMeetingReminder" class="badge bg-success"
+                      >2</span
+                    >
+                  </div>
+                  <div
                     class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
                   >
                     <i class="fas fa-tasks text-success me-2"></i> Review case
                     progress
-                    <span class="badge bg-success">5</span>
-                  </a>
+                    <span
+                      id="caseProgressReminder"
+                      class="badge bg-primary"
+                    ></span>
+                  </div>
                   <a
                     href="#"
                     class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"

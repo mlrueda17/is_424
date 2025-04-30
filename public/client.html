@@ -73,7 +73,7 @@
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#" id="loginLink"
-                ><i class="fas fa-user me-1"></i>Profile</a
+                ><i class="fas fa-user me-1"></i>Log In</a
               >
             </li>
             <li class="nav-item">
@@ -311,6 +311,18 @@
     </script>
     <script src="app.js"></script>
     <script>
+      //Auth state
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          setTimeout(() => {
+            loadClients();
+          }, 500);
+        } else {
+          setTimeout(() => {
+            loadClients();
+          }, 500);
+        }
+      });
       // Form submission for adding a new client
       document
         .getElementById("clientForm")

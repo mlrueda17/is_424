@@ -43,6 +43,8 @@ document.getElementById("loginSubmitButton").addEventListener("click", (e) => {
     .then((userCredential) => {
       alert("Signed In!");
       var user = userCredential.user;
+      document.getElementById("loginEmail").value = "";
+      document.getElementById("loginPassword").value = "";
     });
 });
 
@@ -59,6 +61,9 @@ document.getElementById("signupSubmitButton").addEventListener("click", (e) => {
     .then((userCredential) => {
       alert("Account Created!");
       var user = userCredential.user;
+      document.getElementById("signupEmail").value = "";
+      document.getElementById("signupPassword").value = "";
+      document.getElementById("signupFullName").value = "";
       db.collection("internal_users").doc(user.uid).set({
         email: signupEmail,
         full_name: full_name,
@@ -122,63 +127,44 @@ document.addEventListener("DOMContentLoaded", function () {
   const signupLink = document.getElementById("signupLink");
   const signupModal = document.getElementById("signupModal");
 
-  if (signupLink && signupModal) {
-    signupLink.addEventListener("click", function (event) {
-      event.preventDefault();
-      const modal = bootstrap.Modal.getOrCreateInstance(signupModal);
-      modal.show();
-    });
-  } else {
-    console.error("signupLink or signupModal not found!");
-  }
+  signupLink.addEventListener("click", function (event) {
+    event.preventDefault();
+    const modal = bootstrap.Modal.getOrCreateInstance(signupModal);
+    modal.show();
+  });
 });
 
 // New Case modal
 document.addEventListener("DOMContentLoaded", function () {
   const newCaseButton = document.getElementById("newCaseButton");
   const newCaseModal = document.getElementById("newCaseModal");
-
-  if (newCaseButton && newCaseModal) {
-    newCaseButton.addEventListener("click", function (event) {
-      event.preventDefault();
-      const modal = bootstrap.Modal.getOrCreateInstance(newCaseModal);
-      modal.show();
-    });
-  } else {
-    console.error("signupLink or signupModal not found!");
-  }
+  newCaseButton.addEventListener("click", function (event) {
+    event.preventDefault();
+    const modal = bootstrap.Modal.getOrCreateInstance(newCaseModal);
+    modal.show();
+  });
 });
 
 // New Client modal
 document.addEventListener("DOMContentLoaded", function () {
   const newClientButton = document.getElementById("newClientButton");
   const newClientModal = document.getElementById("newClientModal");
-
-  if (newClientButton && newClientModal) {
-    newClientButton.addEventListener("click", function (event) {
-      event.preventDefault();
-      const modal = bootstrap.Modal.getOrCreateInstance(newClientModal);
-      modal.show();
-    });
-  } else {
-    console.error("signupLink or signupModal not found!");
-  }
+  newClientButton.addEventListener("click", function (event) {
+    event.preventDefault();
+    const modal = bootstrap.Modal.getOrCreateInstance(newClientModal);
+    modal.show();
+  });
 });
 
 // New Report modal
 document.addEventListener("DOMContentLoaded", function () {
   const newReportButton = document.getElementById("newReportButton");
   const newReportModal = document.getElementById("newReportModal");
-
-  if (newReportButton && newReportModal) {
-    newReportButton.addEventListener("click", function (event) {
-      event.preventDefault();
-      const modal = bootstrap.Modal.getOrCreateInstance(newReportModal);
-      modal.show();
-    });
-  } else {
-    console.error("signupLink or signupModal not found!");
-  }
+  newReportButton.addEventListener("click", function (event) {
+    event.preventDefault();
+    const modal = bootstrap.Modal.getOrCreateInstance(newReportModal);
+    modal.show();
+  });
 });
 
 // Find ID of client
@@ -280,6 +266,8 @@ function activeCases() {
       active_cases = mydocs.length;
       document.getElementById("activeCases").innerHTML = "";
       document.getElementById("activeCases").innerHTML = active_cases;
+      document.getElementById("caseProgressReminder").innerHTML = "";
+      document.getElementById("caseProgressReminder").innerHTML = active_cases;
     });
 }
 
@@ -295,6 +283,8 @@ function solvedCases() {
       solved_cases = mydocs.length;
       document.getElementById("solvedCases").innerHTML = "";
       document.getElementById("solvedCases").innerHTML = solved_cases;
+      document.getElementById("clientMeetingReminder").innerHTML = "";
+      document.getElementById("clientMeetingReminder").innerHTML = solved_cases;
     });
 }
 
@@ -326,6 +316,8 @@ function pendingReports() {
       due_soon = mydocs.length;
       document.getElementById("pendingReports").innerHTML = "";
       document.getElementById("pendingReports").innerHTML = due_soon;
+      document.getElementById("pendingReportReminder").innerHTML = "";
+      document.getElementById("pendingReportReminder").innerHTML = due_soon;
     });
 }
 pendingReports();
@@ -337,7 +329,7 @@ function recentCases() {
 
   db.collection("cases")
     .orderBy("timestamp", "desc")
-    .limit(3)
+    .limit(5)
     .get()
     .then((querySnapshot) => {
       if (querySnapshot.empty) {
