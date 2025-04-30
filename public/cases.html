@@ -53,13 +53,29 @@
           <!-- Search Bar -->
           <form class="d-flex mx-auto">
             <div class="input-group">
+              <select
+                class="btn btn-secondary dropdown-toggle bg-primary"
+                name="filter"
+                id="casesFilter"
+              >
+                <option value="">Filter Value</option>
+                <option value="status">Status</option>
+                <option value="related_client">Client</option>
+                <option value="title">Title</option>
+                <option value="assigned_investigator">Investigator</option>
+              </select>
               <input
                 class="form-control"
                 type="search"
-                placeholder="Search cases, clients, or reports..."
+                placeholder="Search cases"
                 style="width: 300px"
+                id="filterSearchTerm"
               />
-              <button class="btn btn-outline-light" type="submit">
+              <button
+                id="casesSearchSubmit"
+                class="btn btn-outline-light"
+                type="submit"
+              >
                 <i class="fas fa-search"></i>
               </button>
             </div>
@@ -545,6 +561,85 @@
             });
         }
       }
+
+      // Search Function
+      document
+        .getElementById("casesSearchSubmit")
+        .addEventListener("click", (e) => {
+          e.preventDefault();
+          let filterValue = document.getElementById("casesFilter").value;
+          let filterSearchTerm =
+            document.getElementById("filterSearchTerm").value;
+          db.collection("cases")
+            .where(filterValue, "==", filterSearchTerm)
+            .get()
+            .then((querySnapshot) => {
+              caseList.innerHTML = "";
+              if (querySnapshot.empty) {
+                caseList.innerHTML =
+                  '<li class="list-group-item text-muted">No cases found</li>';
+              } else {
+                querySnapshot.forEach((doc) => {
+                  const caseData = doc.data();
+                  const caseId = doc.id;
+
+                  // Create list item with Bootstrap styling
+                  const listItem = document.createElement("li");
+                  listItem.className = "list-group-item";
+
+                  // Create case content with title, description, and delete button
+                  listItem.innerHTML = `
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <strong>${caseData.title}</strong>
+                    <p class="mb-1">Description: ${caseData.description}</p>
+                    <p class="mb-1">Status: ${caseData.status}</p>
+                    <p class="mb-1">Due Date: ${caseData.due_date
+                      .toDate()
+                      .toLocaleDateString()}</p>
+                    <p class="mb-1">Client: ${caseData.related_client}</p>
+                    <p class="mb-1">Investigator: ${
+                      caseData.assigned_investigator
+                    }</p>
+                   
+                    <small class="text-muted">Added on: ${caseData.timestamp
+                      .toDate()
+                      .toLocaleString()}</small>  
+                  </div>
+                  <div>
+                  <button class="btn btn-sm btn-success mark-case-complete" mark-complete-id="${caseId}">
+                    Mark as complete
+                  </button>
+                  <button class="btn btn-sm btn-danger delete-case" delete-data-id="${caseId}">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                  </div>
+                </div>
+              `;
+
+                  caseList.appendChild(listItem);
+                });
+
+                // Add event listeners to all delete buttons
+                document.querySelectorAll(".delete-case").forEach((button) => {
+                  button.addEventListener("click", function () {
+                    const caseId = this.getAttribute("delete-data-id");
+                    deleteCase(caseId);
+                  });
+                });
+
+                // Add event listeners to all update buttons
+                document
+                  .querySelectorAll(".mark-case-complete")
+                  .forEach((button) => {
+                    button.addEventListener("click", function () {
+                      const caseId = this.getAttribute("mark-complete-id");
+                      markComplete(caseId);
+                    });
+                  });
+              }
+            });
+        });
     </script>
   </body>
 </html>
