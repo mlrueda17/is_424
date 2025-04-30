@@ -254,8 +254,6 @@ function activeCases() {
     });
 }
 
-activeCases();
-
 // Find solved cases
 function solvedCases() {
   db.collection("cases")
@@ -271,8 +269,6 @@ function solvedCases() {
     });
 }
 
-solvedCases();
-
 // Find active clients
 function activeClients() {
   db.collection("internal_users")
@@ -285,8 +281,6 @@ function activeClients() {
       document.getElementById("activeClients").innerHTML = active_clients;
     });
 }
-
-activeClients();
 
 function pendingReports() {
   let week_from_now = new Date(Date.now() + 604800000);
@@ -303,7 +297,6 @@ function pendingReports() {
       document.getElementById("pendingReportReminder").innerHTML = due_soon;
     });
 }
-pendingReports();
 
 // Display cases on main page
 function recentCases() {
