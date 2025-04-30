@@ -5,6 +5,7 @@ auth.onAuthStateChanged((user) => {
     document.getElementById("loginLink").classList.add("d-none");
     document.getElementById("signupLink").classList.add("d-none");
     document.getElementById("signoutLink").classList.remove("d-none");
+    document.getElementById("notificationBell").classList.remove("d-none");
     document.getElementById("activeCases").innerHTML = "";
     document.getElementById("solvedCases").innerHTML = "";
     document.getElementById("activeClients").innerHTML = "";
@@ -20,6 +21,7 @@ auth.onAuthStateChanged((user) => {
     document.getElementById("loginLink").classList.remove("d-none");
     document.getElementById("signupLink").classList.remove("d-none");
     document.getElementById("signoutLink").classList.add("d-none");
+    document.getElementById("notificationBell").classList.add("d-none");
     document.getElementById("activeCases").innerHTML = "";
     document.getElementById("solvedCases").innerHTML = "";
     document.getElementById("activeClients").innerHTML = "";
