@@ -72,6 +72,14 @@
                 id="filterSearchTerm"
               />
               <button
+                id="filterReset"
+                class="btn bg-white d-none"
+                style="color: red"
+                type="button"
+              >
+                Reset Filter
+              </button>
+              <button
                 id="casesSearchSubmit"
                 class="btn btn-outline-light"
                 type="submit"
@@ -570,11 +578,13 @@
           let filterValue = document.getElementById("casesFilter").value;
           let filterSearchTerm =
             document.getElementById("filterSearchTerm").value;
+
           db.collection("cases")
             .where(filterValue, "==", filterSearchTerm)
             .get()
             .then((querySnapshot) => {
               caseList.innerHTML = "";
+              document.getElementById("filterReset").classList.remove("d-none");
               if (querySnapshot.empty) {
                 caseList.innerHTML =
                   '<li class="list-group-item text-muted">No cases found</li>';
@@ -640,6 +650,13 @@
               }
             });
         });
+
+      // Reset Filter
+      document.getElementById("filterReset").addEventListener("click", (e) => {
+        e.preventDefault();
+        loadCases();
+        document.getElementById("filterReset").classList.add("d-none");
+      });
     </script>
   </body>
 </html>
