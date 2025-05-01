@@ -259,43 +259,6 @@
       </div>
     </div>
 
-    <!-- <script>
-      document
-        .getElementById("clientForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault();
-
-          let name = document.getElementById("clientName").value;
-          let email = document.getElementById("clientEmail").value;
-
-          if (name && email) {
-            // Add to Firestore
-            db.collection("clients")
-              .add({
-                name: name,
-                email: email,
-                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-              })
-              .then(() => {
-                // Create list item for UI
-                let listItem = document.createElement("li");
-                listItem.className = "list-group-item";
-                listItem.textContent = `${name} - ${email}`;
-
-                document.getElementById("clientList").appendChild(listItem);
-                document.getElementById("clientForm").reset();
-
-                console.log("Client added successfully!");
-              })
-              .catch((error) => {
-                console.error("Error adding client:", error);
-              });
-          } else {
-            alert("Please enter both name and email!");
-          }
-        });
-    </script> -->
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 
     <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->

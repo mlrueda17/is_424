@@ -372,34 +372,30 @@
           const assigned_investigator_email = auth.currentUser.email;
           const userID = await findId(related_client);
 
-          if (title && description) {
-            // Add to Firestore
-            db.collection("cases")
-              .add({
-                title: title,
-                description: description,
-                due_date: due_date,
-                timestamp: new Date(),
-                status: status,
-                assigned_investigator: assigned_investigator_email,
-                assigned_investigator_id: assigned_investigator_id,
-                related_client: related_client,
-                related_user_id: userID,
-              })
-              .then(() => {
-                // Add the case to the UI
-                alert("Case submitted!");
-                loadCases();
+          // Add to Firestore
+          db.collection("cases")
+            .add({
+              title: title,
+              description: description,
+              due_date: due_date,
+              timestamp: new Date(),
+              status: status,
+              assigned_investigator: assigned_investigator_email,
+              assigned_investigator_id: assigned_investigator_id,
+              related_client: related_client,
+              related_user_id: userID,
+            })
+            .then(() => {
+              // Add the case to the UI
+              alert("Case submitted!");
+              loadCases();
 
-                // Reset the form
-                document.getElementById("caseForm").reset();
-              })
-              .catch((error) => {
-                console.error("Error adding case:", error);
-              });
-          } else {
-            console.error("Please fill out all required fields!");
-          }
+              // Reset the form
+              document.getElementById("caseForm").reset();
+            })
+            .catch((error) => {
+              console.error("Error adding case:", error);
+            });
         });
 
       // Find role of user

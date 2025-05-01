@@ -1,7 +1,6 @@
 //Auth state
 auth.onAuthStateChanged((user) => {
   if (user) {
-    console.log("User is logged in");
     document.getElementById("loginLink").classList.add("d-none");
     document.getElementById("signupLink").classList.add("d-none");
     document.getElementById("noAuthView").classList.add("d-none");
@@ -20,7 +19,6 @@ auth.onAuthStateChanged((user) => {
     recentCases();
     newCases();
   } else {
-    console.log("No user is logged in");
     document.getElementById("loginLink").classList.remove("d-none");
     document.getElementById("signupLink").classList.remove("d-none");
     document.getElementById("noAuthView").classList.remove("d-none");
