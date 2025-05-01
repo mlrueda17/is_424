@@ -112,7 +112,7 @@
     >
       <h2 class="mb-0 text-danger">You must be signed in to view this page</h2>
     </div>
-    <div class="container mt-5">
+    <div id="clientsPageContent" class="d-none container mt-5">
       <h2 class="mb-4">Client Management</h2>
 
       <!-- Client Form -->
@@ -336,10 +336,14 @@
       //Auth state
       auth.onAuthStateChanged((user) => {
         if (user) {
+          document
+            .getElementById("clientsPageContent")
+            .classList.remove("d-none");
           setTimeout(() => {
             loadClients();
           }, 500);
         } else {
+          document.getElementById("clientsPageContent").classList.add("d-none");
           setTimeout(() => {
             loadClients();
           }, 500);

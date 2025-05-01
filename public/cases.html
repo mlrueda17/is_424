@@ -115,7 +115,7 @@
       <h2 class="mb-0 text-danger">You must be signed in to view this page</h2>
     </div>
 
-    <div class="container mt-5">
+    <div id="casesPageContent" class="d-none container mt-5">
       <h2 class="mb-4">Cases Management</h2>
 
       <!-- Case Form -->
@@ -324,10 +324,15 @@
       //Auth state
       auth.onAuthStateChanged((user) => {
         if (user) {
+          document
+            .getElementById("casesPageContent")
+            .classList.remove("d-none");
+
           setTimeout(() => {
             loadCases();
           }, 500);
         } else {
+          document.getElementById("casesPageContent").classList.add("d-none");
           setTimeout(() => {
             loadCases();
           }, 500);

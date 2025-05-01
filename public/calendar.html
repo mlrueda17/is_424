@@ -84,7 +84,11 @@
     >
       <h2 class="mb-0 text-danger">You must be signed in to view this page</h2>
     </div>
-    <div style="display: flex; justify-content: center; margin-top: 20px">
+    <div
+      id="calendarPageContent"
+      class="d-none"
+      style="display: flex; justify-content: center; margin-top: 20px"
+    >
       <iframe
         src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=America%2FChicago&showPrint=0&src=ZjI3YTViODNjNTVkN2EzOTE5ZGE4MDI4MGVkNGY0ODE2MWRkZjIxNGFlZGUwZmQ1MDUwZDAwOGJkY2M2ZDU3NUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=ZW4udXNhI2hvbGlkYXlAZ3JvdXAudi5jYWxlbmRhci5nb29nbGUuY29t&color=%23616161&color=%230B8043"
         style="border: solid 1px #777"
@@ -209,22 +213,6 @@
       </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-        var calendarEl = document.getElementById("calendar");
-        var calendar = new FullCalendar.Calendar(calendarEl, {
-          initialView: "dayGridMonth",
-          events: [
-            {
-              title: "Example Event",
-              start: new Date().toISOString().split("T")[0],
-            },
-          ],
-        });
-        calendar.render();
-      });
-    </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 
     <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
@@ -261,5 +249,34 @@
       let ref = firebase.storage().ref();
     </script>
     <script src="app.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js"></script>
+    <script>
+      auth.onAuthStateChanged((user) => {
+        if (user) {
+          document
+            .getElementById("calendarPageContent")
+            .classList.remove("d-none");
+        } else {
+          document
+            .getElementById("calendarPageContent")
+            .classList.add("d-none");
+        }
+      });
+
+      document.addEventListener("DOMContentLoaded", function () {
+        var calendarEl = document.getElementById("calendar");
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+          initialView: "dayGridMonth",
+          events: [
+            {
+              title: "Example Event",
+              start: new Date().toISOString().split("T")[0],
+            },
+          ],
+        });
+        calendar.render();
+      });
+    </script>
   </body>
 </html>
